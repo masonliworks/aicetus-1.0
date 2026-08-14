@@ -75,12 +75,13 @@
 
 ## 5. 隐私政策 URL（必需）
 
-**最终采用（GitHub Pages，审核 100% 可访问）**：
-- **`https://masonliworks.github.io/dp-remote-privacy/`** ← 上架时填这个
-- 仓库：github.com/masonliworks/dp-remote-privacy（公开）
-- 中英双语页面，含语言切换；源码 `privacy.html`
+**最终采用（项目仓库 GitHub Pages，审核 100% 可访问）**：
+- **`https://masonliworks.github.io/DSHRemote/privacy/`** ← 上架时填这个
+- 项目仓库：github.com/masonliworks/DSHRemote（公开，README 项目介绍 + privacy/ 隐私政策）
+- 中英双语页面，含语言切换；源码 `privacy/index.html`
 
-> 原方案 `https://aicetus.3366999.xyz/privacy.html` 因阿里云 ICP 备案未通过被拦截，已弃用（页面可保留，但不要填进 ASC）。
+> 原方案 `https://aicetus.3366999.xyz/privacy.html` 因阿里云 ICP 备案未通过被拦截，已弃用。
+> 临时仓库 `dp-remote-privacy` 已弃用（待删）。
 
 ---
 
