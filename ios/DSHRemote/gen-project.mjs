@@ -362,7 +362,7 @@ function targetSettings(config) {
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.8.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.dshremote.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aicetus.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

@@ -1,7 +1,7 @@
 # DSH Remote — App Store 上架文案草稿
 
 > 状态：草稿（待用户确认后由 asc 写入 App Store Connect）
-> 对应 App 记录：`com.dshremote.app`（需先在 ASC 手动创建）
+> 对应 App 记录：`掌中鲸`（App ID 6801499896，bundle id `com.aicetus.app`，2026-08 已创建 ✓）
 
 ---
 
@@ -11,7 +11,7 @@
 |---|---|---|
 | App 名称 | **掌中鲸** | 30 字符内 ✓（原名 DSH Remote 可作备用/英文显示名） |
 | 副标题 (Subtitle) | 中文：**远程掌控 Mac 上的 AI 智能体** ／ 英文：**Control your Mac's AI agent from iPhone** | 各 30 字符内，按语言本地化 |
-| Bundle ID | `com.dshremote.app` | 已配好 |
+| Bundle ID | `com.aicetus.app` | 已创建 ✓（原 com.dshremote.app 被占用已弃用） |
 | 主语言 | 简体中文 | UI 为中文（zh_CN） |
 | 分类 (Primary) | **Developer Tools（开发者工具）** | 建议；备选 Productivity |
 | 次要分类 | 无 | 可选 |
