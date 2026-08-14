@@ -1,0 +1,9 @@
+.DS_Store
+**/xcuserdata/
+**/DerivedData/
+build/
+DerivedData/
+*.xcuserstate
+node_modules/
+dist/
+screenshots/

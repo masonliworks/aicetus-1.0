@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>掌中鲸 (DSH Remote) 隐私政策 / Privacy Policy</title>
+<style>
+  :root {
+    --bg: #f6f7fb; --card: #ffffff; --ink: #1f2430; --muted: #6b7280;
+    --accent: #3b82f6; --border: #e5e7eb;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Segoe UI", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--ink); line-height: 1.75;
+  }
+  .topbar {
+    position: sticky; top: 0; z-index: 10; background: var(--card);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px;
+  }
+  .topbar .brand { font-weight: 700; font-size: 15px; }
+  .lang-switch { display: flex; gap: 4px; }
+  .lang-switch button {
+    border: 1px solid var(--border); background: var(--card); color: var(--ink);
+    border-radius: 8px; padding: 6px 14px; font-size: 13px; cursor: pointer;
+  }
+  .lang-switch button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  main { max-width: 720px; margin: 0 auto; padding: 32px 20px 80px; }
+  h1 { font-size: 24px; margin-bottom: 6px; }
+  .updated { color: var(--muted); font-size: 13px; margin-bottom: 28px; }
+  section { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; margin-bottom: 16px; }
+  h2 { font-size: 17px; margin-bottom: 10px; }
+  p, li { font-size: 14.5px; color: #374151; }
+  ul { padding-left: 22px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 14px; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: #f3f4f6; font-weight: 600; }
+  code { background: #f3f4f6; padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+  .en { display: none; }
+  html[lang="en"] .en { display: block; }
+  html[lang="en"] .zh { display: none; }
+  @media (max-width: 480px) { main { padding: 20px 14px 60px; } section { padding: 18px 16px; } }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">🛡️ 掌中鲸 · DSH Remote</div>
+  <div class="lang-switch">
+    <button id="btn-zh" class="active" onclick="setLang('zh')">中文</button>
+    <button id="btn-en" onclick="setLang('en')">English</button>
+  </div>
+</div>
+
+<main>
+
+<h1 class="zh">掌中鲸（DSH Remote）隐私政策</h1>
+<h1 class="en">Privacy Policy — 掌中鲸 (DSH Remote)</h1>
+<p class="updated zh">生效日期：2026 年 8 月</p>
+<p class="updated en">Effective date: August 2026</p>
+
+<section class="zh">
+  <h2>概述</h2>
+  <p>掌中鲸（DSH Remote，以下简称"本应用"）是一款用于在 iPhone 上查看和控制运行于您自己 Mac 上的 DeepSeek Harness（DSH）AI 代理的辅助工具。本应用<strong>不收集、不上传、不出售任何个人数据</strong>。</p>
+</section>
+<section class="en">
+  <h2>Overview</h2>
+  <p>掌中鲸 (DSH Remote, "the App") is a utility that lets you view and control the DeepSeek Harness (DSH) AI agent running on your own Mac from your iPhone. The App <strong>does not collect, upload, or sell any personal data</strong>.</p>
+</section>
+
+<section class="zh">
+  <h2>我们收集什么</h2>
+  <p><strong>我们不收集任何数据。</strong></p>
+  <ul>
+    <li>本应用没有账号体系，不需要注册，不要求提供姓名、邮箱、电话等个人信息。</li>
+    <li>本应用不包含广告 SDK、统计 SDK 或任何第三方追踪代码。</li>
+  </ul>
+</section>
+<section class="en">
+  <h2>What We Collect</h2>
+  <p><strong>We collect nothing.</strong></p>
+  <ul>
+    <li>The App has no account system, requires no registration, and asks for no personal information such as name, email, or phone number.</li>
+    <li>The App contains no advertising SDKs, analytics SDKs, or any third-party tracking code.</li>
+  </ul>
+</section>
+
+<section class="zh">
+  <h2>数据如何流动</h2>
+  <ul>
+    <li><strong>本地网络通信</strong>：本应用通过局域网（Wi-Fi）与您自己的 Mac 上的桥接服务通信。所有对话记录、任务状态、审批请求等数据仅在您的 iPhone 与您的 Mac 之间传输，<strong>不会经过我们的服务器或任何第三方</strong>。</li>
+    <li><strong>配对信息</strong>：配对密钥保存在您设备的本地存储中，仅用于连接您自己的 Mac。</li>
+  </ul>
+</section>
+<section class="en">
+  <h2>How Data Flows</h2>
+  <ul>
+    <li><strong>Local network only</strong>: The App communicates with a bridge service on your own Mac over Wi-Fi. All conversation history, task status, and approval requests travel only between your iPhone and your Mac — <strong>never through our servers or any third party</strong>.</li>
+    <li><strong>Pairing</strong>: The pairing secret is stored locally on your device and is used only to connect to your own Mac.</li>
+  </ul>
+</section>
+
+<section class="zh">
+  <h2>权限使用说明</h2>
+  <table>
+    <tr><th>权限</th><th>用途</th></tr>
+    <tr><td>相机</td><td>仅用于扫描 Mac 屏幕上显示的配对二维码。<strong>图像不会被存储、上传或分享</strong>。</td></tr>
+    <tr><td>本地网络</td><td>用于连接同一局域网内的 Mac 桥接服务。</td></tr>
+    <tr><td>通知</td><td>用于在收到审批请求、Agent 提问或错误时向您推送本地通知。</td></tr>
+  </table>
+</section>
+<section class="en">
+  <h2>Permissions</h2>
+  <table>
+    <tr><th>Permission</th><th>Purpose</th></tr>
+    <tr><td>Camera</td><td>Only to scan the pairing QR code shown on the Mac screen. <strong>Images are never stored, uploaded, or shared.</strong></td></tr>
+    <tr><td>Local Network</td><td>To reach the bridge service on your Mac within the same local network.</td></tr>
+    <tr><td>Notifications</td><td>To deliver local notifications for approval requests, agent questions, and errors.</td></tr>
+  </table>
+</section>
+
+<section class="zh">
+  <h2>数据存储与安全</h2>
+  <ul>
+    <li>所有数据均存储于您自己的设备上，不经过云端。</li>
+    <li>通信使用 Token 认证，您的 Mac 的 DSH 服务端口不会直接暴露到局域网。</li>
+  </ul>
+</section>
+<section class="en">
+  <h2>Storage &amp; Security</h2>
+  <ul>
+    <li>All data stays on your own devices; nothing goes through the cloud.</li>
+    <li>Communication uses token authentication, and your Mac's DSH service port is never exposed to the local network.</li>
+  </ul>
+</section>
+
+<section class="zh">
+  <h2>儿童隐私</h2>
+  <p>本应用不收集任何个人数据，适用于所有年龄段。</p>
+</section>
+<section class="en">
+  <h2>Children's Privacy</h2>
+  <p>The App collects no personal data and is suitable for all ages.</p>
+</section>
+
+<section class="zh">
+  <h2>政策变更</h2>
+  <p>如本政策发生变更，我们将在本页面更新生效日期，并在应用内提示。</p>
+</section>
+<section class="en">
+  <h2>Changes to This Policy</h2>
+  <p>If this policy changes, we will update the effective date on this page and notify users within the App.</p>
+</section>
+
+<section class="zh">
+  <h2>联系我们</h2>
+  <p>如有任何隐私相关问题，请联系：<a href="mailto:depth.carols19@icloud.com">depth.carols19@icloud.com</a></p>
+</section>
+<section class="en">
+  <h2>Contact Us</h2>
+  <p>For any privacy questions, contact us at: <a href="mailto:depth.carols19@icloud.com">depth.carols19@icloud.com</a></p>
+</section>
+
+</main>
+
+<script>
+  function setLang(l) {
+    document.documentElement.lang = l;
+    document.getElementById('btn-zh').classList.toggle('active', l === 'zh');
+    document.getElementById('btn-en').classList.toggle('active', l === 'en');
+  }
+</script>
+</body>
+</html>

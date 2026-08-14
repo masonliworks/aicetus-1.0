@@ -1,0 +1,364 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1900385E73BA22C199A13693 /* DSHRemoteMacApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF1DD47DE87E9089F4B44AB /* DSHRemoteMacApp.swift */; };
+		9B2C0C1BFA132E73E32BB629 /* Models/MacModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7658AC85BB1C28D0A6E79781 /* Models/MacModels.swift */; };
+		AA316E3D8E8AB3DA65591F9F /* Models/PairingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF75DD857D3C0D95F86EAA8 /* Models/PairingInfo.swift */; };
+		06B51B2AEE9C279B1D0B7912 /* Services/BridgeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4783F67C37BFF8A2134A17D6 /* Services/BridgeManager.swift */; };
+		4DC95B9F11D2478D7CB399AF /* Services/BridgeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 975E50FBC0766D8CD3B60F00 /* Services/BridgeService.swift */; };
+		6A76E9D2BC16F8597FD81546 /* Services/DshInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B3B94A2E630A0EF03DF598 /* Services/DshInstaller.swift */; };
+		A942C9F28693FFA7EACE5F2B /* Services/DshWebManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E96B7E790FACDAC910FB032 /* Services/DshWebManager.swift */; };
+		42E38CE255F39F723BF0702F /* Services/ProcessRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ACBA26D6E856B00F078803A /* Services/ProcessRunner.swift */; };
+		2F75C55FCE167A08B629892E /* Views/ConnectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F118E0888E3BE325767825C /* Views/ConnectView.swift */; };
+		926D545EA03C5AB9B532701B /* Views/MacTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C6B03CF794A58EABDACA04 /* Views/MacTheme.swift */; };
+		C44C13D9C5651EF8BE5837FC /* Views/MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796BA09F1AE14C9975D90D5 /* Views/MenuBarView.swift */; };
+		33BA16D8C6FEE48587229B9E /* Views/OverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1AAB528F4265AC87A3A150A /* Views/OverviewView.swift */; };
+		F2634AEAC4E08AE89D7A8D25 /* Views/PairingQRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2447F62616B45536F649FA8F /* Views/PairingQRView.swift */; };
+		5A048A5962D239BE0A1D024E /* Views/SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0C1D1E18628DE4D1868A664 /* Views/SettingsView.swift */; };
+		4EF1CA1A6A26A7EB3AA2B186 /* bridge in Resources */ = {isa = PBXBuildFile; fileRef = F8C55E6E5709E031F36432DE /* bridge */; };
+		222F0DBFFE5EB23DCD3FD16F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BCE1FB69E14C5460612D8C6 /* Assets.xcassets */; };
+
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		85673086EF6CFD3A1F8591AF /* DSHRemoteMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DSHRemoteMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FF1DD47DE87E9089F4B44AB /* DSHRemoteMacApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSHRemoteMacApp.swift; sourceTree = "<group>"; };
+		7658AC85BB1C28D0A6E79781 /* Models/MacModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/MacModels.swift; sourceTree = "<group>"; };
+		DDF75DD857D3C0D95F86EAA8 /* Models/PairingInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/PairingInfo.swift; sourceTree = "<group>"; };
+		4783F67C37BFF8A2134A17D6 /* Services/BridgeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/BridgeManager.swift; sourceTree = "<group>"; };
+		975E50FBC0766D8CD3B60F00 /* Services/BridgeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/BridgeService.swift; sourceTree = "<group>"; };
+		95B3B94A2E630A0EF03DF598 /* Services/DshInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/DshInstaller.swift; sourceTree = "<group>"; };
+		8E96B7E790FACDAC910FB032 /* Services/DshWebManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/DshWebManager.swift; sourceTree = "<group>"; };
+		6ACBA26D6E856B00F078803A /* Services/ProcessRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Services/ProcessRunner.swift; sourceTree = "<group>"; };
+		5F118E0888E3BE325767825C /* Views/ConnectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/ConnectView.swift; sourceTree = "<group>"; };
+		55C6B03CF794A58EABDACA04 /* Views/MacTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/MacTheme.swift; sourceTree = "<group>"; };
+		C796BA09F1AE14C9975D90D5 /* Views/MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/MenuBarView.swift; sourceTree = "<group>"; };
+		D1AAB528F4265AC87A3A150A /* Views/OverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/OverviewView.swift; sourceTree = "<group>"; };
+		2447F62616B45536F649FA8F /* Views/PairingQRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/PairingQRView.swift; sourceTree = "<group>"; };
+		F0C1D1E18628DE4D1868A664 /* Views/SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/SettingsView.swift; sourceTree = "<group>"; };
+		CA7ED66FD8C434131FE91984 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F8C55E6E5709E031F36432DE /* bridge */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources/bridge; sourceTree = "<group>"; };
+		1BCE1FB69E14C5460612D8C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		69BE8A4D8E4D9DA4E7DB3928 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E50290A24C49A459B43487C5 = {
+			isa = PBXGroup;
+			children = (
+				69F8D45498D7E20DA99BB780 /* DSHRemoteMac */,
+				328EC33DF3954DC9B83FA285 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		328EC33DF3954DC9B83FA285 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				85673086EF6CFD3A1F8591AF /* DSHRemoteMac.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		69F8D45498D7E20DA99BB780 /* DSHRemoteMac */ = {
+			isa = PBXGroup;
+			children = (
+				6FF1DD47DE87E9089F4B44AB /* DSHRemoteMacApp.swift */,
+				7658AC85BB1C28D0A6E79781 /* Models/MacModels.swift */,
+				DDF75DD857D3C0D95F86EAA8 /* Models/PairingInfo.swift */,
+				4783F67C37BFF8A2134A17D6 /* Services/BridgeManager.swift */,
+				975E50FBC0766D8CD3B60F00 /* Services/BridgeService.swift */,
+				95B3B94A2E630A0EF03DF598 /* Services/DshInstaller.swift */,
+				8E96B7E790FACDAC910FB032 /* Services/DshWebManager.swift */,
+				6ACBA26D6E856B00F078803A /* Services/ProcessRunner.swift */,
+				5F118E0888E3BE325767825C /* Views/ConnectView.swift */,
+				55C6B03CF794A58EABDACA04 /* Views/MacTheme.swift */,
+				C796BA09F1AE14C9975D90D5 /* Views/MenuBarView.swift */,
+				D1AAB528F4265AC87A3A150A /* Views/OverviewView.swift */,
+				2447F62616B45536F649FA8F /* Views/PairingQRView.swift */,
+				F0C1D1E18628DE4D1868A664 /* Views/SettingsView.swift */,
+				undefined /* Info.plist */,
+				F8C55E6E5709E031F36432DE /* bridge */,
+				1BCE1FB69E14C5460612D8C6 /* Assets.xcassets */,
+			);
+			path = DSHRemoteMac;
+			sourceTree = "<group>";
+		};
+
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0E8A3AD980EC179856012B7E /* DSHRemoteMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B483F6EB73610DE752E457A0 /* Build configuration list for PBXNativeTarget "DSHRemoteMac" */;
+			buildPhases = (
+				4E57AE888889001C06A4F7E8 /* Sources */,
+				69BE8A4D8E4D9DA4E7DB3928 /* Frameworks */,
+				D6C9E8A172005E68A1DD674F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DSHRemoteMac;
+			productName = DSHRemoteMac;
+			productReference = 85673086EF6CFD3A1F8591AF /* DSHRemoteMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		98F54143AB4E86B28C3AFEE0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					0E8A3AD980EC179856012B7E = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = 41A2CC2D5321B7BB2E956CA5 /* Build configuration list for PBXProject "DSHRemoteMac" */;
+			compatibilityVersion = "Xcode 16.0";
+			developmentRegion = zh_CN;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				zh_CN,
+				en,
+				Base,
+			);
+			mainGroup = E50290A24C49A459B43487C5;
+			productRefGroup = 328EC33DF3954DC9B83FA285 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0E8A3AD980EC179856012B7E /* DSHRemoteMac */,
+			);
+		};
+
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D6C9E8A172005E68A1DD674F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4EF1CA1A6A26A7EB3AA2B186 /* bridge in Resources */,
+				222F0DBFFE5EB23DCD3FD16F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4E57AE888889001C06A4F7E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1900385E73BA22C199A13693 /* DSHRemoteMacApp.swift in Sources */,
+				9B2C0C1BFA132E73E32BB629 /* Models/MacModels.swift in Sources */,
+				AA316E3D8E8AB3DA65591F9F /* Models/PairingInfo.swift in Sources */,
+				06B51B2AEE9C279B1D0B7912 /* Services/BridgeManager.swift in Sources */,
+				4DC95B9F11D2478D7CB399AF /* Services/BridgeService.swift in Sources */,
+				6A76E9D2BC16F8597FD81546 /* Services/DshInstaller.swift in Sources */,
+				A942C9F28693FFA7EACE5F2B /* Services/DshWebManager.swift in Sources */,
+				42E38CE255F39F723BF0702F /* Services/ProcessRunner.swift in Sources */,
+				2F75C55FCE167A08B629892E /* Views/ConnectView.swift in Sources */,
+				926D545EA03C5AB9B532701B /* Views/MacTheme.swift in Sources */,
+				C44C13D9C5651EF8BE5837FC /* Views/MenuBarView.swift in Sources */,
+				33BA16D8C6FEE48587229B9E /* Views/OverviewView.swift in Sources */,
+				F2634AEAC4E08AE89D7A8D25 /* Views/PairingQRView.swift in Sources */,
+				5A048A5962D239BE0A1D024E /* Views/SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2055E4E1A3BD7FEEF0ABAC5F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+
+		};
+		63C8861FB61817C385408E73 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+
+/* End XCBuildConfiguration section */
+		2770E88B2B5BEB31C3214360 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A57YNS9Z36;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = DSHRemoteMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.8.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dshremote.mac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+
+		};
+		03BF3BC5F6693B06DD98480B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = A57YNS9Z36;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = DSHRemoteMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.8.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dshremote.mac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+
+		};
+
+/* Begin XCConfigurationList section */
+		41A2CC2D5321B7BB2E956CA5 /* Build configuration list for PBXProject "DSHRemoteMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2055E4E1A3BD7FEEF0ABAC5F /* Debug */,
+				63C8861FB61817C385408E73 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B483F6EB73610DE752E457A0 /* Build configuration list for PBXNativeTarget "DSHRemoteMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2770E88B2B5BEB31C3214360 /* Debug */,
+				03BF3BC5F6693B06DD98480B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+
+/* End XCConfigurationList section */
+	};
+	rootObject = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+}

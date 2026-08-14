@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSH Remote · Mac 伴侣 App 设计稿</title>
+<style>
+:root{
+  --accent:#0A84FF; --run:#30D158; --idle:#8E8E93; --wait:#FF9F0A; --danger:#FF3B30;
+  --bg:#F5F5F7; --surface:#FFFFFF; --side:#F0F0F3;
+  --t1:#1D1D1F; --t2:rgba(60,60,67,.6); --t3:rgba(60,60,67,.35);
+  --div:rgba(0,0,0,.08);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+body{font-family:-apple-system,"SF Pro Text","PingFang SC",sans-serif;background:#E4E8EC;padding:48px 36px 72px;color:var(--t1)}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+header{max-width:1220px;margin:0 auto 34px}
+h1{font-size:26px;font-weight:700}
+.sub{color:#5B6B7A;font-size:13.5px;margin-top:6px;line-height:1.6}
+.stage{max-width:1220px;margin:0 auto;display:flex;gap:40px;flex-wrap:wrap;align-items:flex-start;justify-content:center}
+.unit{display:flex;flex-direction:column;gap:14px}
+.cap{font-size:12.5px;color:#5B6B7A;max-width:300px;line-height:1.6}
+.cap b{display:block;font-size:14.5px;color:#1B2A38;margin-bottom:2px}
+
+/* ===== macOS 窗口 ===== */
+.win{width:1060px;background:var(--bg);border-radius:12px;overflow:hidden;box-shadow:0 32px 80px -18px rgba(20,40,60,.35),0 0 0 .5px rgba(0,0,0,.12);display:flex;flex-direction:column}
+.tbar{height:44px;flex:none;display:flex;align-items:center;padding:0 14px;gap:8px;background:var(--surface);border-bottom:.5px solid var(--div);position:relative}
+.tl{width:12px;height:12px;border-radius:50%}
+.tbar .tt{position:absolute;left:50%;transform:translateX(-50%);font-size:13px;font-weight:600;color:var(--t2)}
+.body{flex:1;display:flex;min-height:640px}
+
+/* 侧边栏 */
+.side{width:220px;flex:none;background:var(--side);padding:12px 10px;display:flex;flex-direction:column;gap:1px;border-right:.5px solid var(--div)}
+.nav{display:flex;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;font-size:13px;color:var(--t1)}
+.nav.on{background:rgba(0,0,0,.07);font-weight:600}
+.nav .ic{width:20px;text-align:center;color:var(--accent);flex:none;display:flex;justify-content:center}
+.nav .n{margin-left:auto;font-size:11px;color:#fff;background:var(--danger);border-radius:9px;padding:1px 7px;font-weight:600}
+.ssec{font-size:11px;font-weight:600;color:var(--t3);padding:14px 10px 4px;letter-spacing:.04em}
+.sfoot{margin-top:auto;background:var(--surface);border:.5px solid var(--div);border-radius:10px;padding:10px 11px}
+
+/* 主区 */
+.main{flex:1;padding:22px 24px;overflow:hidden}
+.mtitle{font-size:22px;font-weight:700;margin-bottom:14px}
+.card{background:var(--surface);border-radius:12px;border:.5px solid var(--div)}
+.card-h{font-size:13px;font-weight:600;padding:12px 14px 0;display:flex;align-items:center;justify-content:space-between}
+.grid{display:grid;grid-template-columns:280px 1fr;gap:14px}
+.row{display:flex;align-items:center;gap:10px;padding:10px 14px}
+.row + .row{border-top:.5px solid var(--div)}
+.pill{font-size:11px;font-weight:600;padding:2px 9px;border-radius:999px}
+.dot{width:8px;height:8px;border-radius:50%;flex:none}
+.pulse{animation:pl 1.8s ease-in-out infinite}
+@keyframes pl{0%,100%{opacity:1}50%{opacity:.4}}
+.qr{width:140px;height:140px;margin:12px auto 8px;border-radius:10px;border:.5px solid var(--div);background:#fff;padding:9px;display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(12,1fr);gap:1px}
+.qr i{background:#1D1D1F;border-radius:1px}
+.qr i.w{background:transparent}
+.pcode{text-align:center;font-size:13px;letter-spacing:.14em;color:var(--accent);font-weight:600;padding-bottom:4px}
+.toggle{width:44px;height:26px;border-radius:13px;background:var(--run);position:relative;flex:none}
+.toggle i{position:absolute;top:2px;right:2px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.stat{background:var(--surface);border:.5px solid var(--div);border-radius:12px;padding:11px 13px}
+.stat .v{font-size:20px;font-weight:700;margin-top:2px}
+.log{font-size:11px;line-height:1.7;padding:10px 14px;color:var(--t2);max-height:118px;overflow:hidden}
+
+/* ===== 菜单栏下拉 ===== */
+.mpop{width:296px;background:rgba(246,246,248,.92);backdrop-filter:blur(24px);border-radius:12px;box-shadow:0 20px 50px -10px rgba(20,40,60,.35),0 0 0 .5px rgba(0,0,0,.1);overflow:hidden}
+.msec{padding:8px}
+.msec + .msec{border-top:.5px solid var(--div)}
+.mi{display:flex;align-items:center;gap:8px;font-size:13px;padding:6px 8px;border-radius:7px;color:var(--t1)}
+.mi:hover{background:rgba(0,0,0,.05)}
+.foot{max-width:1220px;margin:42px auto 0;color:#8A97A3;font-size:12px;text-align:center;line-height:1.8}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>DSH Remote · Mac 伴侣 App</h1>
+  <p class="sub">与 iOS 端同一套克制的原生语言：中性灰骨架 + #0A84FF accent，语义色只出现在状态上<br>职责单一：跑桥接服务、出示配对码、看管设备与会话</p>
+</header>
+
+<div class="stage">
+
+<!-- ============ 主窗口 ============ -->
+<div class="unit">
+<div class="win">
+  <div class="tbar">
+    <span class="tl" style="background:#FF5F57"></span><span class="tl" style="background:#FEBC2E"></span><span class="tl" style="background:#28C840"></span>
+    <span class="tt">DSH Remote 伴侣</span>
+  </div>
+  <div class="body">
+    <div class="side">
+      <div class="nav on"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg></span>概览</div>
+      <div class="nav"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M21 12a8 8 0 01-8 8H4l2-3a8 8 0 1115-5z"/></svg></span>会话<span class="n">1</span></div>
+      <div class="nav"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg></span>设备</div>
+      <div class="nav"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 17l6-5-6-5M12 19h8"/></svg></span>日志</div>
+      <div class="nav"><span class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.9 2.9l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.2a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.9-2.9l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.2a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.9-2.9l.1.1a1.7 1.7 0 001.9.3h.1a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.2a1.7 1.7 0 001 1.5h.1a1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.9 2.9l-.1.1a1.7 1.7 0 00-.3 1.9v.1a1.7 1.7 0 001.5 1h.2a2 2 0 110 4h-.2a1.7 1.7 0 00-1.5 1z"/></svg></span>设置</div>
+      <div class="ssec">HARNESS</div>
+      <div class="nav" style="font-size:12.5px"><span class="dot pulse" style="background:var(--run)"></span>DeepSeek Harness<span class="mono" style="margin-left:auto;font-size:11px;color:var(--t3)">v1.8.2</span></div>
+      <div class="sfoot">
+        <div style="display:flex;align-items:center;gap:7px">
+          <span class="dot pulse" style="background:var(--run)"></span>
+          <span style="font-size:12px;font-weight:600">桥接服务运行中</span>
+          <span class="mono" style="margin-left:auto;font-size:11px;color:var(--t3)">:7820</span>
+        </div>
+        <div class="mono" style="font-size:11px;color:var(--t3);margin-top:4px">192.168.1.8 · 已运行 3h 24m</div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="mtitle">概览</div>
+      <!-- 状态 + 配对 -->
+      <div class="grid">
+        <div class="card">
+          <div class="card-h">iPhone 配对 <span class="pill" style="background:rgba(10,132,255,.12);color:var(--accent)">dshremote://</span></div>
+          <div class="qr" id="qr"></div>
+          <div class="pcode mono">dshremote://192.168.1.8:7820</div>
+          <div style="font-size:11px;color:var(--t3);text-align:center;padding:0 14px 13px;line-height:1.5">iOS 端「设置 → 扫码配对」<br>扫此码自动填充地址与 Token</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="card">
+            <div class="row" style="padding:13px 14px">
+              <span class="dot pulse" style="background:var(--run)"></span>
+              <div style="flex:1">
+                <div style="font-size:14px;font-weight:600">桥接服务运行中</div>
+                <div class="mono" style="font-size:11px;color:var(--t2);margin-top:2px">ws://192.168.1.8:7820 · Token 已设置 · 局域网发现已开启</div>
+              </div>
+              <div class="toggle"><i></i></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-h">已连接设备</div>
+            <div class="row">
+              <span style="font-size:17px">📱</span>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:600">Lifeng 的 iPhone 15 Pro</div>
+                <div class="mono" style="font-size:11px;color:var(--t3);margin-top:1px">iOS 19.2 · 延迟 12ms · 刚刚活跃</div>
+              </div>
+              <span class="pill" style="background:rgba(48,209,88,.14);color:#248A3D">已连接</span>
+            </div>
+            <div class="row" style="opacity:.55">
+              <span style="font-size:17px">📱</span>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:500">iPad Air</div>
+                <div class="mono" style="font-size:11px;color:var(--t3);margin-top:1px">上次连接 · 3 天前</div>
+              </div>
+              <span class="pill" style="background:rgba(0,0,0,.06);color:var(--t2)">离线</span>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-h">活跃会话 <span class="pill" style="background:rgba(255,159,10,.14);color:#C93400">1 个待审批</span></div>
+            <div class="row">
+              <span class="dot pulse" style="background:var(--wait)"></span>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:600">重构 auth 模块</div>
+                <div class="mono" style="font-size:11px;color:var(--t3);margin-top:1px">harness · 等待 iPhone 审批 npm install</div>
+              </div>
+              <span class="pill" style="background:rgba(255,159,10,.14);color:#C93400">待审批</span>
+            </div>
+            <div class="row">
+              <span class="dot pulse" style="background:var(--run)"></span>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:600">给爬虫加代理池</div>
+                <div class="mono" style="font-size:11px;color:var(--t3);margin-top:1px">wechat-crawler · 正在编辑 proxy_pool.py</div>
+              </div>
+              <span class="pill" style="background:rgba(48,209,88,.14);color:#248A3D">运行中</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 统计 -->
+      <div class="stats">
+        <div class="stat"><span style="font-size:11px;color:var(--t2)">今日审批</span><div class="v">14</div></div>
+        <div class="stat"><span style="font-size:11px;color:var(--t2)">平均响应</span><div class="v">26<span style="font-size:12px;color:var(--t3)">s</span></div></div>
+        <div class="stat"><span style="font-size:11px;color:var(--t2)">消息往返</span><div class="v">1.2<span style="font-size:12px;color:var(--t3)">k</span></div></div>
+        <div class="stat"><span style="font-size:11px;color:var(--t2)">拦截高危命令</span><div class="v" style="color:var(--danger)">3</div></div>
+      </div>
+      <!-- 日志 -->
+      <div class="card" style="margin-top:14px">
+        <div class="card-h">最近日志 <span style="font-size:11px;color:var(--accent)">查看全部</span></div>
+        <div class="log mono">
+          12:04:31 &nbsp;[bridge] iPhone 15 Pro 已连接 (12ms)<br>
+          12:04:47 &nbsp;[harness] session「重构 auth 模块」请求批准: Bash npm install<br>
+          12:04:47 &nbsp;[push] 已向 1 台设备推送审批请求<br>
+          12:05:02 &nbsp;[harness] session「给爬虫加代理池」Edit proxy_pool.py +86 行<br>
+          <span style="color:var(--wait)">12:05:19 &nbsp;[guard] 拦截高危命令 rm -rf ~/（需手机端确认）</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<p class="cap"><b>Mac 伴侣主窗口</b>配对二维码即 `dshremote://` 深链（对齐规范 §6.4）；日志区高亮高危拦截</p>
+</div>
+
+<!-- ============ 菜单栏下拉 ============ -->
+<div class="unit" style="padding-top:6px">
+  <div class="mpop">
+    <div class="msec">
+      <div class="mi" style="align-items:flex-start">
+        <span class="dot pulse" style="background:var(--run);margin-top:5px"></span>
+        <div style="flex:1">
+          <div style="font-weight:600">服务运行中 · 1 台设备在线</div>
+          <div class="mono" style="font-size:11px;color:var(--t2);margin-top:1px">192.168.1.8:7820</div>
+        </div>
+      </div>
+    </div>
+    <div class="msec">
+      <div style="font-size:11px;font-weight:600;color:var(--t3);padding:2px 8px 4px">待审批</div>
+      <div class="mi">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="var(--wait)"><path d="M12 2l8 3.5V11c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V5.5L12 2z"/></svg>
+        <span style="flex:1">重构 auth 模块 · npm install</span>
+        <span style="font-size:11px;color:var(--t3)">2分钟</span>
+      </div>
+    </div>
+    <div class="msec">
+      <div class="mi"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>打开主窗口</div>
+      <div class="mi"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 8V5a2 2 0 012-2h3M16 3h3a2 2 0 012 2v3M21 16v3a2 2 0 01-2 2h-3M8 21H5a2 2 0 01-2-2v-3M3 12h18"/></svg>显示配对二维码</div>
+      <div class="mi"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>停止服务</div>
+    </div>
+    <div class="msec" style="display:flex;justify-content:space-between;align-items:center;padding:6px 14px">
+      <span class="mono" style="font-size:11px;color:var(--t3)">v0.3.1</span>
+      <span style="font-size:12px;color:var(--t2)">退出</span>
+    </div>
+  </div>
+  <p class="cap"><b>菜单栏常驻</b>待审批直接露出，不打断也能感知</p>
+</div>
+
+</div>
+
+<p class="foot">DSH Remote · Mac 伴侣 App 设计稿 · 与 iOS 端共享语义色（#0A84FF / #30D158 / #FF9F0A / #FF3B30）<br>中性灰骨架，彩色仅用于状态与语义 · SF 系统字体 · 无装饰渐变</p>
+
+<script>
+// 装饰性假二维码（含三个定位角）
+const qr = document.getElementById('qr');
+let seed = 42;
+const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+for (let r = 0; r < 12; r++) for (let c = 0; c < 12; c++) {
+  const cell = document.createElement('i');
+  const finder = (r < 4 && c < 4) || (r < 4 && c > 7) || (r > 7 && c < 4);
+  if (finder) {
+    const lr = r % 4, lc = c % 4;
+    cell.className = (lr === 0 || lr === 3 || lc === 0 || lc === 3 || (lr > 0 && lr < 3 && lc > 0 && lc < 3)) ? '' : 'w';
+  } else cell.className = rnd() < 0.42 ? '' : 'w';
+  qr.appendChild(cell);
+}
+</script>
+</body>
+</html>

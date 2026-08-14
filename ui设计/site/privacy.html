@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>隐私声明 · 掌中鲸</title>
+<meta name="description" content="掌中鲸隐私声明：我们如何（不）收集、使用和保护你的数据。">
+<link rel="icon" type="image/png" href="assets/logo-mark.png">
+<style>
+  :root{
+    --blue:#2563EB;--ink:#0F172A;--ink-2:#475569;--ink-3:#94A3B8;
+    --line:#E2E8F0;--paper:#FFF;--wash:#F6F8FC;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+  body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","PingFang SC","Helvetica Neue",sans-serif;background:var(--paper);color:var(--ink);line-height:1.85}
+  .wrap{max-width:760px;margin:0 auto;padding:0 clamp(20px,4vw,40px)}
+  nav{border-bottom:1px solid var(--line);background:rgba(255,255,255,.86);backdrop-filter:blur(14px);position:sticky;top:0;z-index:10}
+  .nav-in{display:flex;align-items:center;gap:10px;height:60px}
+  .nav-in img{width:28px;height:28px;border-radius:7px}
+  .brand{font-weight:700;font-size:15px}
+  .back{margin-left:auto;font-size:13.5px;color:var(--ink-2);text-decoration:none}
+  .back:hover{color:var(--blue)}
+
+  header{padding:52px 0 28px;border-bottom:1px solid var(--line)}
+  h1{font-size:clamp(26px,3.6vw,34px);font-weight:800;letter-spacing:-.01em;margin-bottom:10px}
+  .meta{font-size:13px;color:var(--ink-3)}
+  .tldr{
+    background:var(--wash);border:1px solid var(--line);border-left:3px solid var(--blue);
+    border-radius:10px;padding:16px 20px;margin:26px 0;font-size:14.5px;color:var(--ink-2);
+  }
+  .tldr b{color:var(--ink)}
+
+  article{padding:14px 0 64px;font-size:15px;color:var(--ink-2)}
+  h2{font-size:19px;font-weight:800;color:var(--ink);margin:38px 0 12px;padding-top:8px}
+  h2 .no{color:var(--blue);font-size:13px;font-weight:700;letter-spacing:.1em;display:block;margin-bottom:2px}
+  p{margin-bottom:12px}
+  ul{margin:0 0 12px 1.2em}
+  li{margin-bottom:6px}
+  table{width:100%;border-collapse:collapse;margin:14px 0 18px;font-size:14px}
+  th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+  th{background:var(--wash);font-weight:700;color:var(--ink)}
+  a{color:var(--blue)}
+  footer{border-top:1px solid var(--line);padding:28px 0 40px;font-size:13px;color:var(--ink-3)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <img src="assets/logo-mark.png" alt="掌中鲸 Logo">
+    <span class="brand">掌中鲸</span>
+    <a class="back" href="index.html">← 返回首页</a>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <h1>隐私声明</h1>
+    <p class="meta">生效日期：2026 年 8 月 14 日 · 适用产品：掌中鲸 iOS 版 / macOS 伴侣版 · 版本 v1.0</p>
+    <div class="tldr">
+      <b>一句话版：</b>掌中鲸不注册账号、不上传你的代码与对话、不做行为追踪。
+      你的数据只在你自己的 iPhone 和 Mac 之间通过局域网直接传输。
+    </div>
+  </div>
+</header>
+
+<article class="wrap">
+
+  <h2><span class="no">1</span>我们是谁</h2>
+  <p>掌中鲸（aicetus.cn）是一款运行在 iPhone 与 Mac 上的工具类应用：Mac 伴侣 App 在你本地运行桥接服务，iOS App 通过局域网与之通信，用于远程查看和审批运行在 Mac 上的 AI 智能体任务。本声明说明我们在提供该服务时如何处理你的信息。</p>
+
+  <h2><span class="no">2</span>我们收集的信息</h2>
+  <p><b style="color:var(--ink)">我们不收集任何可直接识别你身份的个人信息。</b>具体来说：</p>
+  <table>
+    <tr><th>数据类型</th><th>是否收集</th><th>说明</th></tr>
+    <tr><td>账号信息（姓名、邮箱、手机号）</td><td>否</td><td>应用无需注册、无需登录</td></tr>
+    <tr><td>你的代码、会话内容、审批记录</td><td>否</td><td>仅在你自己的设备间局域网传输，不经过我们的服务器</td></tr>
+    <tr><td>设备标识符（IDFA / IDFV 等）</td><td>否</td><td>不读取、不上报</td></tr>
+    <tr><td>使用行为分析（埋点/统计）</td><td>否</td><td>应用内不含任何第三方分析 SDK</td></tr>
+    <tr><td>精确位置信息</td><td>否</td><td>应用不请求定位权限</td></tr>
+    <tr><td>崩溃日志</td><td>可选</td><td>仅当你在全系统设置中开启「与 App 开发者共享」时，Apple 才会向我们提供匿名化崩溃报告</td></tr>
+  </table>
+
+  <h2><span class="no">3</span>权限使用说明</h2>
+  <ul>
+    <li><b style="color:var(--ink)">本地网络（iOS / macOS）</b>：用于在你的 iPhone 与 Mac 之间建立 WebSocket 直连。这是应用的核心功能，数据不离开你的局域网。</li>
+    <li><b style="color:var(--ink)">相机（仅 iOS）</b>：仅用于「扫码配对」时识别 Mac 屏幕上显示的二维码。取景画面在本地实时处理，不拍照、不存储、不上传。</li>
+    <li><b style="color:var(--ink)">通知（仅 iOS）</b>：用于在智能体请求审批（如执行高危命令）时向你推送提醒。通知内容由你的 Mac 生成并直接送达，不经过第三方推送服务。</li>
+  </ul>
+
+  <h2><span class="no">4</span>数据存储与安全</h2>
+  <ul>
+    <li>配对信息（Mac 地址、端口、访问 Token）仅存储在你设备的系统安全存储中（iOS Keychain / macOS Keychain）。</li>
+    <li>会话数据在设备本地缓存，卸载应用即被系统删除；我们没有服务器端副本。</li>
+    <li>局域网通信使用配对 Token 鉴权；建议仅在可信网络（如家庭/办公室 Wi-Fi）中使用。</li>
+  </ul>
+
+  <h2><span class="no">5</span>数据共享与第三方</h2>
+  <p>我们不向任何第三方出售、出租或共享你的数据，应用内也不含广告 SDK、社交分享 SDK 或行为追踪组件。应用与 AI 模型服务之间的通信发生在你的 Mac 上，由你的 Mac 端配置决定，与掌中鲸 iOS App 无关。</p>
+
+  <h2><span class="no">6</span>儿童隐私</h2>
+  <p>掌中鲸是面向开发者的工具，不面向 14 岁以下儿童，也不会有意收集儿童信息。</p>
+
+  <h2><span class="no">7</span>本声明的更新</h2>
+  <p>如产品功能变化导致本声明需要更新，我们会在本页面发布新版本并更新顶部「生效日期」。重大变更时，我们会在应用内作出提示。</p>
+
+  <h2><span class="no">8</span>联系我们</h2>
+  <p>如对本声明或隐私实践有任何疑问，可通过 <a href="mailto:depth.carols19@icloud.com">depth.carols19@icloud.com</a> 与我们联系。</p>
+
+</article>
+
+<footer>
+  <div class="wrap">© 2026 掌中鲸 · <a href="index.html" style="color:inherit">aicetus.cn</a></div>
+</footer>
+
+</body>
+</html>

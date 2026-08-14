@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSH Remote · iOS 端 UI 设计稿（对齐 ui-design-spec v0.3）</title>
+<style>
+/* ===== 规范 §4.1 语义色：浅色（默认）/ 深色（.dk）===== */
+.phone{
+  --bg:#F2F2F7; --surface:#FFFFFF; --raised:#FFFFFF;
+  --t1:#000000; --t2:rgba(60,60,67,.6); --t3:rgba(60,60,67,.3);
+  --div:rgba(60,60,67,.12);
+  --accent:#0A84FF; --run:#30D158; --idle:#8E8E93; --wait:#FF9F0A; --danger:#FF3B30; --done:#007AFF;
+  --wait-bg:rgba(255,159,10,.10);
+}
+.phone.dk{
+  --bg:#000000; --surface:#1C1C1E; --raised:#2C2C2E;
+  --t1:#FFFFFF; --t2:rgba(235,235,245,.6); --t3:rgba(235,235,245,.3);
+  --div:rgba(84,84,88,.65);
+  --accent:#0A84FF; --run:#30D158; --idle:#98989D; --wait:#FFD60A; --danger:#FF453A; --done:#0A84FF;
+  --wait-bg:rgba(255,214,10,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+body{font-family:-apple-system,"SF Pro Text","PingFang SC","Helvetica Neue",sans-serif;background:#E9EEF2;padding:48px 36px 72px;color:#1B2A38}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+header{max-width:1300px;margin:0 auto 36px}
+h1{font-size:26px;font-weight:700}
+.sub{color:#5B6B7A;font-size:13.5px;margin-top:6px;line-height:1.6}
+.stage{max-width:1300px;margin:0 auto;display:flex;gap:32px;flex-wrap:wrap;justify-content:center}
+.unit{display:flex;flex-direction:column;align-items:center;gap:14px}
+.cap{font-size:12.5px;color:#5B6B7A;text-align:center;max-width:330px;line-height:1.6}
+.cap b{display:block;font-size:14.5px;color:#1B2A38;margin-bottom:2px}
+
+/* ===== iPhone 外壳 ===== */
+.phone{width:390px;height:844px;background:#1C1C1E;border-radius:56px;padding:10px;box-shadow:0 24px 60px -16px rgba(20,40,60,.35)}
+.scr{width:100%;height:100%;border-radius:46px;background:var(--bg);overflow:hidden;position:relative;display:flex;flex-direction:column;color:var(--t1)}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:114px;height:32px;background:#1C1C1E;border-radius:18px;z-index:30}
+.sbar{height:54px;flex:none;display:flex;align-items:flex-end;justify-content:space-between;padding:0 32px 8px;font-size:15px;font-weight:600;position:relative;z-index:25}
+.sbar .ic{display:flex;gap:6px;align-items:center}
+
+/* ===== 全局连接横幅 §6.1（32pt .bar 材质）===== */
+.gbanner{flex:none;height:32px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;color:var(--t2);background:color-mix(in srgb,var(--surface) 82%,transparent);backdrop-filter:blur(14px);border-bottom:.5px solid var(--div)}
+.sdot{width:8px;height:8px;border-radius:50%;flex:none}
+
+/* ===== 导航栏 ===== */
+.navbar{flex:none;display:flex;align-items:center;justify-content:space-between;padding:10px 16px 12px;background:var(--bg)}
+.navbar .ttl{font-size:17px;font-weight:600}
+.navbar.inline{justify-content:center;position:relative;padding-top:6px;padding-bottom:10px;border-bottom:.5px solid var(--div)}
+.navbar.inline .back{position:absolute;left:8px;color:var(--accent);font-size:15px;display:flex;align-items:center;gap:2px}
+
+/* ===== 会话列表 §5.2/§5.3 ===== */
+.list{flex:1;overflow:hidden;padding:0 16px}
+.ws-head{display:flex;align-items:center;gap:6px;padding:14px 2px 6px}
+.ws-head .nm{font-size:12px;font-weight:600;color:var(--t1)}
+.ws-head .pt{font-size:11px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow{background:var(--surface);border-radius:12px;padding:11px 12px;margin-bottom:8px;display:flex;gap:10px}
+.srow .l{flex:1;min-width:0}
+.srow .t{font-size:17px;font-weight:600;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow .st{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--t2);margin-top:4px}
+.preset{font-size:11px;color:var(--t2);border:1px solid var(--div);border-radius:999px;padding:1px 8px}
+.goal-line{font-size:13px;color:var(--t2);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow .r{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;flex:none}
+.appr-badge{display:flex;align-items:center;gap:3px;color:#fff;background:var(--danger);border-radius:999px;font-size:12px;font-weight:600;padding:2px 8px}
+.time{font-size:11px;color:var(--t3)}
+.tabbar{flex:none;height:83px;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(14px);border-top:.5px solid var(--div);display:flex;padding:10px 0 24px}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;color:var(--idle);position:relative}
+.tab.on{color:var(--accent)}
+.tbadge{position:absolute;top:-2px;left:calc(50% + 8px);min-width:17px;height:17px;border-radius:9px;background:var(--danger);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;padding:0 5px}
+
+/* ===== 会话详情组件 ===== */
+.msgs{flex:1;overflow:hidden;padding:10px 16px 6px;display:flex;flex-direction:column;gap:8px}
+.bub{max-width:78%;padding:9px 13px;border-radius:16px;font-size:15px;line-height:1.4}
+.bub.u{align-self:flex-end;background:color-mix(in srgb,var(--accent) 15%,transparent);border-bottom-right-radius:4px}
+.bub.a{align-self:flex-start;background:var(--surface);max-width:88%;border-bottom-left-radius:4px}
+.drawer{font-size:12px;color:var(--t2);display:flex;align-items:center;gap:5px;padding:5px 0;cursor:pointer}
+.drawer .st-ic{margin-left:auto}
+.tool-open{background:color-mix(in srgb,var(--idle) 10%,transparent);border-radius:8px;padding:8px 10px;margin:4px 0 2px}
+.tool-open .code{font-size:12px;line-height:1.5;word-break:break-all}
+.stream-tag{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);margin-bottom:4px}
+.breath{animation:breath 1.8s ease-in-out infinite}
+@keyframes breath{0%,100%{opacity:1}50%{opacity:.45}}
+.caret{display:inline-block;width:8px;height:15px;background:var(--accent);border-radius:2px;vertical-align:-2px;animation:breath 1s steps(2) infinite}
+
+/* 队列卡片 §5.8 */
+.queue-sec{flex:none;padding:4px 16px;display:flex;flex-direction:column;gap:6px;background:color-mix(in srgb,var(--surface) 82%,transparent);backdrop-filter:blur(14px)}
+.qcard{background:var(--surface);border-radius:12px;padding:9px 11px;display:flex;gap:9px;align-items:flex-start}
+.qcard .qt{flex:1;font-size:15px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.qtag{flex:none;font-size:11px;font-weight:600;border-radius:999px;padding:2px 8px;margin-top:1px}
+.qops{display:flex;gap:12px;flex:none;margin-top:2px}
+
+/* 目标条 / 任务条 §5.10 */
+.strip{flex:none;margin:0 16px;background:var(--surface);border-radius:12px;padding:8px 11px;font-size:12px;display:flex;align-items:center;gap:7px;color:var(--t1)}
+.strip .ops{margin-left:auto;display:flex;gap:12px;color:var(--t2)}
+
+/* 审批卡 §5.9 */
+.appr{flex:none;margin:0 16px;background:var(--wait-bg);border-radius:12px;padding:10px 12px}
+.appr .ah{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600}
+.appr .rsn{font-size:15px;color:var(--t2);margin:6px 0 10px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.appr .btns{display:flex;gap:10px}
+.btn{flex:1;text-align:center;font-size:15px;font-weight:600;padding:8px 0;border-radius:10px}
+.btn.deny{color:var(--danger);border:1px solid var(--danger)}
+.btn.ok{color:#fff;background:var(--accent)}
+
+/* 底部信息栏 §5.11 */
+.infobar{flex:none;margin:0;display:flex;align-items:center;gap:12px;padding:7px 16px;background:color-mix(in srgb,var(--surface) 82%,transparent);backdrop-filter:blur(14px);border-top:.5px solid var(--div);font-size:12px;color:var(--t2)}
+.model-cap{display:flex;align-items:center;gap:5px;background:var(--raised);border:1px solid var(--div);border-radius:999px;padding:4px 10px;font-size:12px;color:var(--t1)}
+.ring{position:relative;width:18px;height:18px;flex:none}
+
+/* 输入栏 §5.13 */
+.composer{flex:none;display:flex;align-items:flex-end;gap:8px;padding:8px 12px 22px;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(14px);border-top:.5px solid var(--div)}
+.mode{width:40px;flex:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;border-radius:10px;padding:6px 0;color:var(--t2);background:var(--raised);border:1px solid var(--div)}
+.mode.hot{color:#fff;background:var(--accent);border-color:var(--accent)}
+.field{flex:1;min-height:36px;background:var(--raised);border:1px solid var(--div);border-radius:18px;padding:8px 14px;font-size:15px;color:var(--t3)}
+.send{width:36px;height:36px;flex:none;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center}
+.send.stop{background:var(--danger)}
+
+/* 模型 popover §5.12 */
+.pop{position:absolute;left:16px;bottom:150px;width:300px;background:var(--raised);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.35);z-index:40;overflow:hidden}
+.pop .ph{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:.5px solid var(--div);font-size:13px;font-weight:600}
+.pop .grp{font-size:11px;font-weight:600;color:var(--t2);padding:9px 14px 3px;letter-spacing:.04em}
+.pop .it{display:flex;align-items:center;gap:9px;padding:9px 14px;font-size:14px}
+.pop .it .eff{margin-left:auto;font-size:11px;color:var(--t3)}
+.ck{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--t3);flex:none;display:flex;align-items:center;justify-content:center}
+.ck.on{background:var(--accent);border-color:var(--accent)}
+
+.foot{max-width:1300px;margin:44px auto 0;color:#8A97A3;font-size:12px;text-align:center;line-height:1.8}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>DSH Remote · iOS 端设计稿</h1>
+  <p class="sub">严格对齐 ui-design-spec v0.3：系统字体 / iOS 语义色 / 8pt 栅格 / 列表卡片无阴影 / .bar 材质横栏<br>
+  三屏 = 会话列表（浅色）· 会话详情全貌（浅色）· 会话详情 + 模型 popover（深色）</p>
+</header>
+
+<div class="stage">
+
+<!-- ============ 屏 1 · 会话列表（浅色）============ -->
+<div class="unit" data-shot="session-list-light">
+<div class="phone"><div class="scr">
+  <div class="island"></div>
+  <div class="sbar"><span>9:41</span><span class="ic">
+    <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+    <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 000-4z" fill="currentColor" opacity=".4"/></svg>
+  </span></div>
+  <div class="gbanner"><span class="sdot" style="background:var(--run)"></span>已连接 · 2 个会话运行中 · deepseek-v4</div>
+  <div class="navbar"><span class="ttl" style="font-size:28px;font-weight:700">会话</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+  </div>
+  <div class="list">
+    <div class="ws-head"><span style="font-size:13px">📁</span><span class="nm">harness</span><span class="pt mono">~/Projects/harness</span></div>
+    <div class="srow">
+      <div class="l">
+        <div class="t">重构 auth 模块</div>
+        <div class="st"><span class="sdot" style="background:var(--wait)"></span>待审批<span class="preset">code-reviewer</span></div>
+        <div class="goal-line">🎯 完成 session 服务抽离并通过测试</div>
+      </div>
+      <div class="r">
+        <span class="appr-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l8 3.5V11c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V5.5L12 2z"/></svg>1</span>
+        <span class="time">2分钟前</span>
+      </div>
+    </div>
+    <div class="srow">
+      <div class="l">
+        <div class="t">修复 CI 流水线</div>
+        <div class="st"><span class="sdot" style="background:var(--run)"></span>运行中<span class="preset">default</span></div>
+      </div>
+      <div class="r"><span></span><span class="time">18分钟前</span></div>
+    </div>
+    <div class="ws-head"><span style="font-size:13px">📁</span><span class="nm">wechat-crawler</span><span class="pt mono">~/Projects/wechat-crawler</span></div>
+    <div class="srow">
+      <div class="l">
+        <div class="t">给爬虫加代理池</div>
+        <div class="st"><span class="sdot" style="background:var(--run)"></span>运行中<span class="preset">default</span></div>
+        <div class="goal-line">🎯 支持按地区轮换出口 IP</div>
+      </div>
+      <div class="r">
+        <span class="appr-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l8 3.5V11c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V5.5L12 2z"/></svg>2</span>
+        <span class="time">5分钟前</span>
+      </div>
+    </div>
+    <div class="srow" style="opacity:.7">
+      <div class="l">
+        <div class="t">整理周报素材</div>
+        <div class="st"><span class="sdot" style="background:var(--idle)"></span>空闲<span class="preset">writer</span></div>
+      </div>
+      <div class="r"><span></span><span class="time">1小时前</span></div>
+    </div>
+  </div>
+  <div class="tabbar">
+    <div class="tab on">
+      <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M21 12a8 8 0 01-8 8H4l2-3a8 8 0 1115-5z"/></svg>会话
+      <span class="tbadge">3</span>
+    </div>
+    <div class="tab">
+      <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.9 2.9l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.2a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.9-2.9l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.2a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.9-2.9l.1.1a1.7 1.7 0 001.9.3h.1a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.2a1.7 1.7 0 001 1.5h.1a1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.9 2.9l-.1.1a1.7 1.7 0 00-.3 1.9v.1a1.7 1.7 0 001.5 1h.2a2 2 0 110 4h-.2a1.7 1.7 0 00-1.5 1z"/></svg>设置
+    </div>
+  </div>
+</div></div>
+<p class="cap"><b>会话列表 · 浅色</b>工作区分栏（§5.2）；状态点+文字双重编码；红盾牌徽标=待审批数；Tab 角标=全局待办（§6.2）</p>
+</div>
+
+<!-- ============ 屏 2 · 会话详情全貌（浅色）============ -->
+<div class="unit" data-shot="chat-light">
+<div class="phone"><div class="scr">
+  <div class="island"></div>
+  <div class="sbar"><span>9:41</span><span class="ic">
+    <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+    <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 000-4z" fill="currentColor" opacity=".4"/></svg>
+  </span></div>
+  <div class="gbanner"><span class="sdot" style="background:var(--run)"></span>已连接 · 2 个会话运行中 · deepseek-v4</div>
+  <div class="navbar inline">
+    <span class="back"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg></span>
+    <span style="text-align:center"><span class="ttl" style="font-size:15px">重构 auth 模块</span><br><span style="font-size:11px;color:var(--t2)">harness · code-reviewer</span></span>
+  </div>
+  <div class="msgs">
+    <div class="bub u">把 session 管理抽成独立服务，别动 .env</div>
+    <div class="bub a">
+      <div class="drawer"><span>›</span>🧠 思考过程</div>
+      <div class="drawer"><span>›</span>🔧 Bash · 找到 14 处引用，集中在 session.ts<span class="st-ic" style="color:var(--run)">✓</span></div>
+      <div class="tool-open">
+        <div class="drawer" style="padding:0 0 5px"><span style="transform:rotate(90deg);display:inline-block">›</span>🔧 Read · src/auth/session.ts<span class="st-ic" style="color:var(--run)">✓</span></div>
+        <div class="code mono" style="color:var(--t2)">export class SessionManager {<br>&nbsp;&nbsp;private store: TokenStore;<br>&nbsp;&nbsp;async refresh(token: string) …</div>
+      </div>
+      <div style="margin-top:4px">方案：新建 <span class="mono" style="font-size:13px">SessionService</span>，jwt 升到 v9。需要重装依赖。</div>
+    </div>
+    <div class="bub a breath" style="max-width:88%">
+      <div class="stream-tag">🧠 思考中… <span style="color:var(--t3)">对比 jsonwebtoken v8/v9 的 API 差异，确认废弃参数…</span></div>
+      <div>正在升级依赖，预计改动 3 个文件<span class="caret"></span></div>
+    </div>
+  </div>
+  <div class="queue-sec">
+    <div class="qcard">
+      <span class="qtag" style="background:color-mix(in srgb,var(--wait) 15%,transparent);color:var(--wait)">⏱ 排队中</span>
+      <div class="qt">顺便把登录页的报错提示也统一成 toast</div>
+      <div class="qops">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t2)" stroke-width="1.8" stroke-linecap="round"><path d="M17 3a2.8 2.8 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14a2 2 0 002 2h6a2 2 0 002-2l1-14"/></svg>
+      </div>
+    </div>
+  </div>
+  <div style="flex:none;display:flex;flex-direction:column;gap:6px;padding:6px 0">
+    <div class="strip">🎯 <span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">完成 session 服务抽离并通过测试</span>
+      <span class="ops">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </span>
+    </div>
+    <div class="strip" style="flex-direction:column;align-items:stretch;gap:4px">
+      <div style="display:flex;gap:7px;align-items:center">🔨 <span style="flex:1">抽取 SessionService</span><span style="color:var(--done);font-size:11px">进行中</span></div>
+      <div style="display:flex;gap:7px;align-items:center;color:var(--t2)">✓ <span style="flex:1">升级 jsonwebtoken v9</span><span style="font-size:11px">完成</span></div>
+      <div style="display:flex;gap:7px;align-items:center;color:var(--t2)">○ <span style="flex:1">补充单测</span><span style="font-size:11px">待开始</span></div>
+    </div>
+  </div>
+  <div class="appr">
+    <div class="ah" style="color:var(--wait)">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l8 3.5V11c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V5.5L12 2z"/></svg>
+      工具调用待审批<span class="preset mono" style="margin-left:2px">Bash</span>
+    </div>
+    <div class="rsn">需要执行 <span class="mono" style="font-size:13px">npm install</span> 以升级 jsonwebtoken 到 v9（工作目录 ~/Projects/harness）</div>
+    <div class="btns"><span class="btn deny">拒绝</span><span class="btn ok">允许一次</span></div>
+  </div>
+  <div class="infobar" style="margin-top:6px">
+    <span class="model-cap">🖥 deepseek-v4 · High
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+    </span>
+    <span style="display:flex;align-items:center;gap:5px">
+      <span class="ring"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="var(--div)" stroke-width="2.5"/><circle cx="9" cy="9" r="7" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="17" transform="rotate(-90 9 9)"/></svg></span>
+      上下文 62%
+    </span>
+    <span style="margin-left:auto;display:flex;align-items:center;gap:3px;color:var(--accent);font-weight:600">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>命令
+    </span>
+  </div>
+  <div class="composer">
+    <div class="mode">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/><path d="M18 16l3 2-3 2v-4z" fill="currentColor" stroke="none"/></svg>
+      排队
+    </div>
+    <div class="field">发消息…</div>
+    <div class="send stop">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><rect x="6" y="6" width="12" height="12" rx="2.5"/></svg>
+    </div>
+  </div>
+</div></div>
+<p class="cap"><b>会话详情 · 浅色（P0 全貌）</b>流式气泡呼吸动效 / 思考·工具抽屉 / 队列卡片 / 目标条 / 任务条 / 审批卡 / 信息栏（模型胶囊+上下文圆环+命令）/ 排队模式 + 红色停止键</p>
+</div>
+
+<!-- ============ 屏 3 · 会话详情 + 模型 popover（深色）============ -->
+<div class="unit">
+<div class="phone dk"><div class="scr">
+  <div class="island"></div>
+  <div class="sbar"><span>9:41</span><span class="ic">
+    <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+    <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 000-4z" fill="currentColor" opacity=".4"/></svg>
+  </span></div>
+  <div class="gbanner"><span class="sdot" style="background:var(--run)"></span>已连接 · 1 个会话运行中 · deepseek-v4</div>
+  <div class="navbar inline">
+    <span class="back"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg></span>
+    <span style="text-align:center"><span class="ttl" style="font-size:15px">给爬虫加代理池</span><br><span style="font-size:11px;color:var(--t2)">wechat-crawler · default</span></span>
+  </div>
+  <div class="msgs">
+    <div class="bub u">代理池要支持按地区轮换</div>
+    <div class="bub a">
+      <div class="drawer"><span>›</span>🧠 思考过程</div>
+      <div class="drawer"><span>›</span>🔧 Edit · proxy_pool.py +86 行<span class="st-ic" style="color:var(--run)">✓</span></div>
+      <div style="margin-top:4px">已加 <span class="mono" style="font-size:13px">RegionRotator</span>，支持省份级轮换。要我把延迟也纳入打分吗？</div>
+    </div>
+    <div class="bub a">
+      <div style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--wait);margin-bottom:6px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><text x="12" y="16.5" text-anchor="middle" font-size="13" font-weight="700" fill="#000">?</text></svg>
+        Agent 提问
+      </div>
+      <div style="font-size:15px;line-height:1.4">代理源用哪一个？</div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-top:9px;font-size:14px">
+        <span style="display:flex;align-items:center;gap:8px"><span class="ck on"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span>站大爷（已有账号）</span>
+        <span style="display:flex;align-items:center;gap:8px;color:var(--t2)"><span class="ck"></span>快代理</span>
+        <span style="display:flex;align-items:center;gap:8px;color:var(--t2)"><span class="ck"></span>自建机房</span>
+      </div>
+      <div class="btns" style="display:flex;gap:10px;margin-top:11px"><span class="btn ok" style="padding:7px 0">提交</span><span class="btn" style="border:1px solid var(--div);color:var(--t2);padding:7px 0">跳过</span></div>
+    </div>
+  </div>
+  <div style="flex:none;display:flex;flex-direction:column;gap:6px;padding:6px 0">
+    <div class="strip">🎯 <span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">支持按地区轮换出口 IP</span>
+      <span class="ops">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </span>
+    </div>
+  </div>
+  <div class="infobar" style="margin-top:6px">
+    <span class="model-cap" style="border-color:var(--accent)">🖥 deepseek-v4 · High
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+    </span>
+    <span style="display:flex;align-items:center;gap:5px">
+      <span class="ring"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="var(--div)" stroke-width="2.5"/><circle cx="9" cy="9" r="7" fill="none" stroke="var(--wait)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="6" transform="rotate(-90 9 9)"/></svg></span>
+      <span style="color:var(--wait)">上下文 87%</span>
+    </span>
+    <span style="margin-left:auto;display:flex;align-items:center;gap:3px;color:var(--accent);font-weight:600">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>命令
+    </span>
+  </div>
+  <div class="composer">
+    <div class="mode hot">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+      插话
+    </div>
+    <div class="field">打断当前任务，先说这个…</div>
+    <div class="send">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+    </div>
+  </div>
+  <!-- 模型选择 popover §5.12 -->
+  <div class="pop">
+    <div class="ph">模型与思考强度
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--t2)" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </div>
+    <div class="grp">DEEPSEEK</div>
+    <div class="it"><span class="ck on"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span>deepseek-v4<span class="eff">思考强度 · High</span></div>
+    <div class="it"><span class="ck"></span>deepseek-v4-pro<span class="eff">思考强度 · Max</span></div>
+    <div class="it"><span class="ck"></span>deepseek-v4-flash<span class="eff">思考强度 · Off</span></div>
+    <div class="grp">其他 PROVIDER</div>
+    <div class="it" style="opacity:.55"><span class="ck"></span>qwen3-max<span class="eff">思考强度 · Off</span></div>
+  </div>
+</div></div>
+<p class="cap"><b>会话详情 · 深色 + 提问卡 + 模型 popover</b>插话模式高亮 accent；上下文 87% 圆环转橙（>85% 规范红色，此处过渡态）；模型选择为小气泡锚定胶囊（§5.12）</p>
+</div>
+
+</div>
+
+<p class="foot">DSH Remote · iOS 设计稿 · 对齐 ui-design-spec v0.3<br>语义色：accent #0A84FF · 运行 #30D158 · 待办 #FF9F0A/#FFD60A · 危险 #FF3B30/#FF453A · 完成 #007AFF<br>字体：SF 系统族 · 代码 SF Mono · 圆角 8/12/16/pill · 列表卡片无阴影 · 横幅/输入栏 .bar 材质</p>
+
+</body>
+</html>

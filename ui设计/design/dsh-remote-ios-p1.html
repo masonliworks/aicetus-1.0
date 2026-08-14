@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSH Remote · iOS 端 P1 页面（对齐 ui-design-spec v0.3）</title>
+<style>
+.phone{
+  --bg:#F2F2F7; --surface:#FFFFFF; --raised:#FFFFFF;
+  --t1:#000000; --t2:rgba(60,60,67,.6); --t3:rgba(60,60,67,.3);
+  --div:rgba(60,60,67,.12);
+  --accent:#0A84FF; --run:#30D158; --idle:#8E8E93; --wait:#FF9F0A; --danger:#FF3B30; --done:#007AFF;
+}
+.phone.dk{
+  --bg:#000000; --surface:#1C1C1E; --raised:#2C2C2E;
+  --t1:#FFFFFF; --t2:rgba(235,235,245,.6); --t3:rgba(235,235,245,.3);
+  --div:rgba(84,84,88,.65);
+  --accent:#0A84FF; --run:#30D158; --idle:#98989D; --wait:#FFD60A; --danger:#FF453A; --done:#0A84FF;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+body{font-family:-apple-system,"SF Pro Text","PingFang SC",sans-serif;background:#E9EEF2;padding:48px 36px 72px;color:#1B2A38}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+header{max-width:1300px;margin:0 auto 36px}
+h1{font-size:26px;font-weight:700}
+.sub{color:#5B6B7A;font-size:13.5px;margin-top:6px;line-height:1.6}
+.stage{max-width:1300px;margin:0 auto;display:flex;gap:32px;flex-wrap:wrap;justify-content:center}
+.unit{display:flex;flex-direction:column;align-items:center;gap:14px}
+.cap{font-size:12.5px;color:#5B6B7A;text-align:center;max-width:330px;line-height:1.6}
+.cap b{display:block;font-size:14.5px;color:#1B2A38;margin-bottom:2px}
+
+.phone{width:390px;height:844px;background:#1C1C1E;border-radius:56px;padding:10px;box-shadow:0 24px 60px -16px rgba(20,40,60,.35)}
+.scr{width:100%;height:100%;border-radius:46px;background:var(--bg);overflow:hidden;position:relative;display:flex;flex-direction:column;color:var(--t1)}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:114px;height:32px;background:#1C1C1E;border-radius:18px;z-index:30}
+.sbar{height:54px;flex:none;display:flex;align-items:flex-end;justify-content:space-between;padding:0 32px 8px;font-size:15px;font-weight:600;position:relative;z-index:25}
+.sbar .ic{display:flex;gap:6px;align-items:center}
+.gbanner{flex:none;height:32px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;color:var(--t2);background:color-mix(in srgb,var(--surface) 82%,transparent);backdrop-filter:blur(14px);border-bottom:.5px solid var(--div)}
+.sdot{width:8px;height:8px;border-radius:50%;flex:none}
+.pulse{animation:pl 1.8s ease-in-out infinite}
+@keyframes pl{0%,100%{opacity:1}50%{opacity:.4}}
+.navbar{flex:none;display:flex;align-items:center;justify-content:space-between;padding:10px 16px 12px}
+.navbar .ttl{font-size:17px;font-weight:600}
+
+/* 会话列表 */
+.list{flex:1;overflow:hidden;padding:0 16px}
+.ws-head{display:flex;align-items:center;gap:6px;padding:14px 2px 6px}
+.ws-head .nm{font-size:12px;font-weight:600}
+.ws-head .pt{font-size:11px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow{background:var(--surface);border-radius:12px;padding:11px 12px;margin-bottom:8px;display:flex;gap:10px}
+.srow .l{flex:1;min-width:0}
+.srow .t{font-size:17px;font-weight:600;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow .st{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--t2);margin-top:4px}
+.preset{font-size:11px;color:var(--t2);border:1px solid var(--div);border-radius:999px;padding:1px 8px}
+.goal-line{font-size:13px;color:var(--t2);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow .r{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;flex:none}
+.appr-badge{display:flex;align-items:center;gap:3px;color:#fff;background:var(--danger);border-radius:999px;font-size:12px;font-weight:600;padding:2px 8px}
+.time{font-size:11px;color:var(--t3)}
+.tabbar{flex:none;height:83px;background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(14px);border-top:.5px solid var(--div);display:flex;padding:10px 0 24px}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;color:var(--idle);position:relative}
+.tab.on{color:var(--accent)}
+.tbadge{position:absolute;top:-2px;left:calc(50% + 8px);min-width:17px;height:17px;border-radius:9px;background:var(--danger);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;padding:0 5px}
+
+/* sheet */
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.35);z-index:35}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:40;background:var(--raised);border-radius:16px 16px 0 0;padding:8px 0 26px;box-shadow:0 -8px 40px rgba(0,0,0,.2)}
+.grab{width:36px;height:5px;border-radius:3px;background:var(--t3);margin:2px auto 10px}
+.sheet-h{display:flex;align-items:center;justify-content:space-between;padding:4px 16px 12px;font-size:17px;font-weight:600}
+.sheet-h .act{font-size:15px;font-weight:400;color:var(--accent)}
+.sheet-h .act.dis{color:var(--t3)}
+.pick-sec{font-size:12px;font-weight:600;color:var(--t2);padding:4px 16px 6px;letter-spacing:.04em}
+.pick{background:var(--surface);border:1px solid var(--div);border-radius:12px;margin:0 16px 4px;overflow:hidden}
+.pick .it{display:flex;align-items:center;gap:10px;padding:11px 13px;font-size:15px}
+.pick .it + .it{border-top:.5px solid var(--div)}
+.pick .it .ds{flex:1;font-size:12px;color:var(--t2);margin-top:1px}
+.ck{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--t3);flex:none;display:flex;align-items:center;justify-content:center}
+.ck.on{background:var(--accent);border-color:var(--accent)}
+.tarea{margin:0 16px 10px;background:var(--surface);border:1px solid var(--div);border-radius:12px;padding:11px 13px;font-size:15px;line-height:1.45;min-height:84px;color:var(--t1)}
+.stepper{margin:0 16px 10px;background:var(--surface);border:1px solid var(--div);border-radius:12px;padding:11px 13px;display:flex;align-items:center;font-size:15px}
+.stepper .ctl{margin-left:auto;display:flex;align-items:center;gap:14px}
+.stepper .b{width:26px;height:26px;border-radius:8px;border:1px solid var(--div);display:flex;align-items:center;justify-content:center;color:var(--accent);font-size:16px}
+.footnote{font-size:12px;color:var(--t3);padding:0 20px 4px;line-height:1.5}
+
+/* 设置页 grouped list */
+.group{margin:0 16px 18px}
+.group .gt{font-size:12px;color:var(--t2);padding:0 14px 6px}
+.gcard{background:var(--surface);border-radius:12px;overflow:hidden}
+.grow{display:flex;align-items:center;gap:10px;padding:11px 14px;font-size:15px}
+.grow + .grow{border-top:.5px solid var(--div)}
+.grow .val{margin-left:auto;color:var(--t2);font-size:14px;display:flex;align-items:center;gap:6px;min-width:0}
+.grow .val span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.big-btn{display:block;margin:0 16px;background:var(--accent);color:#fff;text-align:center;font-size:16px;font-weight:600;border-radius:12px;padding:13px 0}
+
+/* 扫码取景 */
+.finder{flex:1;position:relative;background:#0A0A0C;margin:0 0 0}
+.finder .frame{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:230px;height:230px}
+.finder .frame i{position:absolute;width:34px;height:34px;border:3.5px solid var(--accent)}
+.finder .frame i:nth-child(1){left:0;top:0;border-right:none;border-bottom:none;border-radius:14px 0 0 0}
+.finder .frame i:nth-child(2){right:0;top:0;border-left:none;border-bottom:none;border-radius:0 14px 0 0}
+.finder .frame i:nth-child(3){left:0;bottom:0;border-right:none;border-top:none;border-radius:0 0 0 14px}
+.finder .frame i:nth-child(4){right:0;bottom:0;border-left:none;border-top:none;border-radius:0 0 14px 0}
+.scanline{position:absolute;left:14px;right:14px;height:2px;background:var(--accent);border-radius:2px;top:50%;box-shadow:0 0 12px var(--accent);animation:scan 2.2s ease-in-out infinite}
+@keyframes scan{0%,100%{transform:translateY(-88px)}50%{transform:translateY(88px)}}
+.foot{max-width:1300px;margin:44px auto 0;color:#8A97A3;font-size:12px;text-align:center;line-height:1.8}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>DSH Remote · iOS 端 P1 页面</h1>
+  <p class="sub">会话列表深色版 · 新建会话 sheet · 创建目标 sheet · 设置页 · 扫码配对取景页（规范 §6.4 / §6.5）</p>
+</header>
+
+<div class="stage">
+
+<!-- ============ 会话列表 · 深色 ============ -->
+<div class="unit">
+<div class="phone dk"><div class="scr">
+  <div class="island"></div>
+  <div class="sbar"><span>9:41</span><span class="ic">
+    <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+    <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 000-4z" fill="currentColor" opacity=".4"/></svg>
+  </span></div>
+  <div class="gbanner"><span class="sdot" style="background:var(--run)"></span>已连接 · 2 个会话运行中 · deepseek-v4</div>
+  <div class="navbar"><span class="ttl" style="font-size:28px;font-weight:700">会话</span>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+  </div>
+  <div class="list">
+    <div class="ws-head"><span style="font-size:13px">📁</span><span class="nm">harness</span><span class="pt mono">~/Projects/harness</span></div>
+    <div class="srow">
+      <div class="l">
+        <div class="t">重构 auth 模块</div>
+        <div class="st"><span class="sdot pulse" style="background:var(--wait)"></span>待审批<span class="preset">code-reviewer</span></div>
+        <div class="goal-line">🎯 完成 session 服务抽离并通过测试</div>
+      </div>
+      <div class="r">
+        <span class="appr-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l8 3.5V11c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V5.5L12 2z"/></svg>1</span>
+        <span class="time">2分钟前</span>
+      </div>
+    </div>
+    <div class="srow">
+      <div class="l">
+        <div class="t">修复 CI 流水线</div>
+        <div class="st"><span class="sdot pulse" style="background:var(--run)"></span>运行中<span class="preset">default</span></div>
+      </div>
+      <div class="r"><span></span><span class="time">18分钟前</span></div>
+    </div>
+    <div class="ws-head"><span style="font-size:13px">📁</span><span class="nm">wechat-crawler</span><span class="pt mono">~/Projects/wechat-crawler</span></div>
+    <div class="srow">
+      <div class="l">
+        <div class="t">给爬虫加代理池</div>
+        <div class="st"><span class="sdot pulse" style="background:var(--run)"></span>运行中<span class="preset">default</span></div>
+        <div class="goal-line">🎯 支持按地区轮换出口 IP</div>
+      </div>
+      <div class="r">
+        <span class="appr-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l8 3.5V11c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V5.5L12 2z"/></svg>2</span>
+        <span class="time">5分钟前</span>
+      </div>
+    </div>
+    <div class="srow" style="opacity:.7">
+      <div class="l">
+        <div class="t">整理周报素材</div>
+        <div class="st"><span class="sdot" style="background:var(--idle)"></span>空闲<span class="preset">writer</span></div>
+      </div>
+      <div class="r"><span></span><span class="time">1小时前</span></div>
+    </div>
+  </div>
+  <div class="tabbar">
+    <div class="tab on">
+      <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M21 12a8 8 0 01-8 8H4l2-3a8 8 0 1115-5z"/></svg>会话
+      <span class="tbadge">3</span>
+    </div>
+    <div class="tab">
+      <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.9 2.9l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.2a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.9-2.9l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.2a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.9-2.9l.1.1a1.7 1.7 0 001.9.3h.1a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.2a1.7 1.7 0 001 1.5h.1a1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.9 2.9l-.1.1a1.7 1.7 0 00-.3 1.9v.1a1.7 1.7 0 001.5 1h.2a2 2 0 110 4h-.2a1.7 1.7 0 00-1.5 1z"/></svg>设置
+    </div>
+  </div>
+</div></div>
+<p class="cap"><b>会话列表 · 深色</b>补齐双模式；深色 waiting 用 #FFD60A、danger 用 #FF453A（§4.1 深色列）</p>
+</div>
+
+<!-- ============ 新建会话 sheet ============ -->
+<div class="unit">
+<div class="phone"><div class="scr">
+  <div class="island"></div>
+  <div class="sbar"><span>9:41</span><span class="ic">
+    <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+    <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 000-4z" fill="currentColor" opacity=".4"/></svg>
+  </span></div>
+  <div class="gbanner"><span class="sdot" style="background:var(--run)"></span>已连接 · 2 个会话运行中 · deepseek-v4</div>
+  <div class="navbar"><span class="ttl" style="font-size:28px;font-weight:700">会话</span></div>
+  <div class="list" style="flex:none">
+    <div class="ws-head"><span style="font-size:13px">📁</span><span class="nm">harness</span><span class="pt mono">~/Projects/harness</span></div>
+    <div class="srow"><div class="l"><div class="t">重构 auth 模块</div><div class="st"><span class="sdot" style="background:var(--wait)"></span>待审批<span class="preset">code-reviewer</span></div></div></div>
+  </div>
+  <div class="dim"></div>
+  <div class="sheet">
+    <div class="grab"></div>
+    <div class="sheet-h"><span class="act">取消</span>新建会话<span class="act" style="font-weight:600">创建</span></div>
+    <div class="pick-sec">工作区</div>
+    <div class="pick">
+      <div class="it"><span class="ck on"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>harness</span><span class="val mono" style="margin-left:auto;font-size:12px;color:var(--t3)">~/Projects/harness</span></div>
+      <div class="it"><span class="ck"></span><span>wechat-crawler</span><span class="val mono" style="margin-left:auto;font-size:12px;color:var(--t3)">~/Projects/wechat-crawler</span></div>
+      <div class="it"><span class="ck"></span><span style="color:var(--t2)">不指定工作区</span></div>
+    </div>
+    <div class="pick-sec" style="margin-top:10px">AGENT 预设</div>
+    <div class="pick">
+      <div class="it"><span class="ck on"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span style="flex:none">default</span><span class="ds">通用预设，适合大多数任务</span></div>
+      <div class="it"><span class="ck"></span><span style="flex:none">code-reviewer</span><span class="ds">先给方案再动手，改动逐条确认</span></div>
+      <div class="it"><span class="ck"></span><span style="flex:none">writer</span><span class="ds">文案与整理向，减少命令执行</span></div>
+    </div>
+  </div>
+</div></div>
+<p class="cap"><b>新建会话 sheet（§6.5）</b>工作区 Picker + Agent 预设 Picker（含描述）+ 创建/取消</p>
+</div>
+
+<!-- ============ 创建目标 sheet ============ -->
+<div class="unit">
+<div class="phone"><div class="scr">
+  <div class="island"></div>
+  <div class="sbar"><span>9:41</span><span class="ic">
+    <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+    <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 000-4z" fill="currentColor" opacity=".4"/></svg>
+  </span></div>
+  <div class="gbanner"><span class="sdot" style="background:var(--run)"></span>已连接 · 2 个会话运行中 · deepseek-v4</div>
+  <div class="navbar"><span class="ttl">重构 auth 模块</span></div>
+  <div class="dim"></div>
+  <div class="sheet">
+    <div class="grab"></div>
+    <div class="sheet-h"><span class="act">取消</span>创建目标<span class="act" style="font-weight:600">创建</span></div>
+    <div class="pick-sec">目标描述</div>
+    <div class="tarea">完成 session 服务抽离，现有测试全部通过，不引入新依赖…</div>
+    <div class="pick-sec">轮次上限</div>
+    <div class="stepper">最多自动执行轮次
+      <span class="ctl"><span class="b">−</span><span style="font-weight:600;min-width:28px;text-align:center">20</span><span class="b">＋</span></span>
+    </div>
+    <p class="footnote">达到轮次上限后 Agent 会暂停并等待你的指示。留空描述将无法创建。</p>
+  </div>
+</div></div>
+<p class="cap"><b>创建目标 sheet（§6.5）</b>objective 多行输入 + 轮次上限 stepper + 创建/取消</p>
+</div>
+
+<!-- ============ 设置页 ============ -->
+<div class="unit">
+<div class="phone"><div class="scr">
+  <div class="island"></div>
+  <div class="sbar"><span>9:41</span><span class="ic">
+    <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+    <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 000-4z" fill="currentColor" opacity=".4"/></svg>
+  </span></div>
+  <div class="gbanner"><span class="sdot" style="background:var(--run)"></span>已连接 · 2 个会话运行中 · deepseek-v4</div>
+  <div class="navbar"><span class="ttl" style="font-size:28px;font-weight:700">设置</span></div>
+  <div class="list" style="padding-top:2px">
+    <div class="group">
+      <div class="gt">桥接服务</div>
+      <div class="gcard">
+        <div class="grow">地址<span class="val mono"><span>ws://192.168.1.8:7820</span></span></div>
+        <div class="grow">Token<span class="val"><span class="mono">••••••7K2P</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t2)" stroke-width="1.7"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>
+        </div>
+      </div>
+      <p class="footnote" style="padding-top:6px">地址与 Token 由 Mac 伴侣 App 生成，建议扫码自动填充。</p>
+    </div>
+    <div class="group">
+      <div class="gt">配对</div>
+      <span class="big-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" style="vertical-align:-3px;margin-right:6px"><path d="M3 8V5a2 2 0 012-2h3M16 3h3a2 2 0 012 2v3M21 16v3a2 2 0 01-2 2h-3M8 21H5a2 2 0 01-2-2v-3M3 12h18"/></svg>扫码配对
+      </span>
+    </div>
+    <div class="group">
+      <div class="gt">连接</div>
+      <div class="gcard">
+        <div class="grow" style="color:var(--accent);justify-content:center">保存并重连</div>
+        <div class="grow" style="color:var(--danger);justify-content:center">断开连接</div>
+      </div>
+    </div>
+    <div class="group">
+      <div class="gt">连接状态</div>
+      <div class="gcard">
+        <div class="grow">状态<span class="val"><span class="sdot" style="background:var(--run)"></span>已连接</span></div>
+        <div class="grow">DSH 版本<span class="val">v1.8.2</span></div>
+        <div class="grow">当前模型<span class="val">deepseek-v4 · High</span></div>
+        <div class="grow">错误<span class="val">无</span></div>
+      </div>
+    </div>
+    <div class="group">
+      <div class="gt">关于</div>
+      <div class="gcard">
+        <div class="grow">DSH Remote<span class="val">v0.3.1</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="tabbar">
+    <div class="tab">
+      <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M21 12a8 8 0 01-8 8H4l2-3a8 8 0 1115-5z"/></svg>会话
+    </div>
+    <div class="tab on">
+      <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.9 2.9l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.2a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.9-2.9l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.2a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.9-2.9l.1.1a1.7 1.7 0 001.9.3h.1a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.2a1.7 1.7 0 001 1.5h.1a1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.9 2.9l-.1.1a1.7 1.7 0 00-.3 1.9v.1a1.7 1.7 0 001.5 1h.2a2 2 0 110 4h-.2a1.7 1.7 0 00-1.5 1z"/></svg>设置
+    </div>
+  </div>
+</div></div>
+<p class="cap"><b>设置页（§6.4）</b>桥接服务地址+Token（可显隐）/ 扫码配对大按钮 / 保存重连与断开 / 连接状态四项 / 关于</p>
+</div>
+
+<!-- ============ 扫码取景页 ============ -->
+<div class="unit">
+<div class="phone dk"><div class="scr">
+  <div class="island"></div>
+  <div class="sbar" style="color:#fff"><span>9:41</span><span class="ic">
+    <svg width="17" height="11" viewBox="0 0 17 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+    <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#fff" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#fff"/><path d="M23 4v4a2.2 2.2 0 000-4z" fill="#fff" opacity=".4"/></svg>
+  </span></div>
+  <div style="flex:none;display:flex;justify-content:space-between;align-items:center;padding:4px 16px 10px;color:#fff;background:#0A0A0C">
+    <span style="color:var(--accent);font-size:15px">取消</span>
+    <span style="font-size:15px;font-weight:600">扫码配对</span>
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round"><path d="M13 2L4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2z"/></svg>
+  </div>
+  <div class="finder">
+    <div class="frame"><i></i><i></i><i></i><i></i><div class="scanline"></div></div>
+    <div style="position:absolute;left:0;right:0;top:calc(44% + 135px);text-align:center;color:#fff">
+      <div style="font-size:15px;font-weight:600">对准 Mac 伴侣 App 中的二维码</div>
+      <div style="font-size:12.5px;opacity:.6;margin-top:6px">识别 dshremote:// 后自动填充地址与 Token<br>连接成功时震动反馈</div>
+    </div>
+  </div>
+  <div style="flex:none;background:#0A0A0C;padding:14px 16px 34px;text-align:center">
+    <span style="font-size:13px;color:rgba(255,255,255,.65)">无法扫码？<span style="color:var(--accent)">手动输入地址与 Token</span></span>
+  </div>
+</div></div>
+<p class="cap"><b>扫码配对取景页（§6.4）</b>全屏取景 + 四角框 + 扫描线动效；扫到 dshremote:// 自动连接并震动</p>
+</div>
+
+</div>
+
+<p class="foot">DSH Remote · iOS P1 页面 · 对齐 ui-design-spec v0.3 §6.4/§6.5 · 浅色 sheet 与深色取景均使用规范 token</p>
+
+</body>
+</html>

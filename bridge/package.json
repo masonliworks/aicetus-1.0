@@ -1,0 +1,14 @@
+{
+  "name": "dsh-remote-bridge",
+  "version": "0.8.0",
+  "description": "Token-authenticated bridge between the iOS remote-control app and a local DeepSeek Harness (dsh web) instance",
+  "type": "module",
+  "bin": {
+    "dsh-remote-bridge": "server.js"
+  },
+  "main": "server.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT"
+}
