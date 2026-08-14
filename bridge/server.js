@@ -21,6 +21,9 @@ import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { DshClient } from "./dsh-client.js";
+import { DashboardCollector } from "./dashboard.js";
+
+const BRIDGE_VERSION = "2.0.0";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -112,9 +115,18 @@ const WHITELIST = new Set([
   "llm.providers",
   "llm.models",
   "llm.discoverModels",
+  "dashboard.summary",
 ]);
 
 const dsh = new DshClient(DSH_URL);
+
+// 仪表数据收集器（今日 token 增量累计 / 余额缓存 / 汇总）
+const dashboard = new DashboardCollector({
+  stateDir,
+  pricingPath: path.join(__dirname, "pricing.json"),
+  dsh,
+  bridgeVersion: BRIDGE_VERSION,
+});
 
 // Lightweight client telemetry for the Mac companion's overview dashboard.
 const telemetry = {
@@ -295,6 +307,23 @@ const server = http.createServer(async (req, res) => {
   if (!WHITELIST.has(method)) {
     logLine(req, 403, `(method ${method})`);
     deny(res, 403, { error: "method not whitelisted", method });
+    return;
+  }
+  // 仪表汇总：桥接自实现（本地聚合 + 余额代理），不透传给 DSH。
+  if (method === "dashboard.summary") {
+    try {
+      const value = await dashboard.summary();
+      logLine(req, 200, "(dashboard.summary)");
+      res.writeHead(200, { "content-type": "application/json" });
+      res.end(JSON.stringify({
+        type: "server-response",
+        rpcId: message.rpcId,
+        result: { ok: true, value },
+      }));
+    } catch (err) {
+      logLine(req, 502, "(dashboard.summary)");
+      deny(res, 502, { error: String(err?.message ?? err) });
+    }
     return;
   }
   try {

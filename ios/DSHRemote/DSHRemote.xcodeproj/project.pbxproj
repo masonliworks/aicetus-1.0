@@ -22,6 +22,7 @@
 		0E6D21E5DC51AD89EDECC1FD /* Views/UIComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCFAA816AA761CE4E51A2A9 /* Views/UIComponents.swift */; };
 		E2FDD86193C783C468589596 /* Views/UITheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29095E907D09F0A33E1E2FA7 /* Views/UITheme.swift */; };
 		222F0DBFFE5EB23DCD3FD16F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1BCE1FB69E14C5460612D8C6 /* Assets.xcassets */; };
+		ECEEA0346EA710E5EAA22643 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 55E1416B6DC005EC7005C148 /* PrivacyInfo.xcprivacy */; };
 
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		29095E907D09F0A33E1E2FA7 /* Views/UITheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Views/UITheme.swift; sourceTree = "<group>"; };
 		CA7ED66FD8C434131FE91984 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1BCE1FB69E14C5460612D8C6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		55E1416B6DC005EC7005C148 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 
 /* End PBXFileReference section */
 
@@ -93,6 +95,7 @@
 				29095E907D09F0A33E1E2FA7 /* Views/UITheme.swift */,
 				CA7ED66FD8C434131FE91984 /* Info.plist */,
 				1BCE1FB69E14C5460612D8C6 /* Assets.xcassets */,
+				55E1416B6DC005EC7005C148 /* PrivacyInfo.xcprivacy */,
 			);
 			path = DSHRemote;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				222F0DBFFE5EB23DCD3FD16F /* DSHRemote/Assets.xcassets in Resources */,
+				ECEEA0346EA710E5EAA22643 /* DSHRemote/PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +332,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.8.0;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aicetus.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -353,7 +357,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.8.0;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aicetus.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

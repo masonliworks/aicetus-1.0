@@ -55,6 +55,7 @@ const ids = {
   releaseTgt: uuid("releaseTgt"),
   infoRef: uuid("infoRef"),
   assetRef: uuid("assetRef"),
+  privacyRef: uuid("privacyRef"),
 };
 
 const fileRefs = {}; // absPath -> id
@@ -68,6 +69,8 @@ for (const f of swiftFiles) {
 fileRefs[assetBundle] = ids.assetRef;
 buildFiles[assetBundle] = uuid("build:Assets.xcassets");
 fileRefs[path.join(appDir, "Info.plist")] = ids.infoRef;
+fileRefs[path.join(appDir, "PrivacyInfo.xcprivacy")] = ids.privacyRef;
+buildFiles[path.join(appDir, "PrivacyInfo.xcprivacy")] = uuid("build:PrivacyInfo.xcprivacy");
 
 // --- serialization helpers --------------------------------------------------
 const esc = (s) =>
@@ -96,6 +99,11 @@ for (const f of swiftFiles) {
   const rel = "Assets.xcassets";
   body += `\t\t${buildFiles[assetBundle]} /* ${rel} in Resources */ = {isa = PBXBuildFile; fileRef = ${ids.assetRef} /* ${rel} */; };\n`;
 }
+{
+  const rel = "PrivacyInfo.xcprivacy";
+  const abs = path.join(appDir, rel);
+  body += `\t\t${buildFiles[abs]} /* ${rel} in Resources */ = {isa = PBXBuildFile; fileRef = ${ids.privacyRef} /* ${rel} */; };\n`;
+}
 out += section("PBXBuildFile", body);
 
 // PBXFileReference
@@ -106,6 +114,7 @@ for (const f of swiftFiles) {
 }
 body += `\t\t${ids.infoRef} /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };\n`;
 body += `\t\t${ids.assetRef} /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };\n`;
+body += `\t\t${ids.privacyRef} /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };\n`;
 out += section("PBXFileReference", body);
 
 // PBXFrameworksBuildPhase
@@ -137,7 +146,7 @@ body += `\t\t${ids.productsGroup} /* Products */ = {
 body += `\t\t${ids.appGroup} /* DSHRemote */ = {
 			isa = PBXGroup;
 			children = (\n`;
-for (const f of [...swiftFiles, path.join(appDir, "Info.plist"), assetBundle]) {
+for (const f of [...swiftFiles, path.join(appDir, "Info.plist"), assetBundle, path.join(appDir, "PrivacyInfo.xcprivacy")]) {
   const rel = path.relative(appDir, f);
   body += `\t\t\t\t${fileRefs[f]} /* ${esc(rel)} */,\n`;
 }
@@ -203,6 +212,7 @@ out += section("PBXResourcesBuildPhase", `\t\t${ids.resourcesPhase} /* Resources
 			buildActionMask = 2147483647;
 			files = (
 				${buildFiles[assetBundle]} /* DSHRemote/Assets.xcassets in Resources */,
+				${buildFiles[path.join(appDir, "PrivacyInfo.xcprivacy")]} /* DSHRemote/PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};\n`);
@@ -361,7 +371,7 @@ function targetSettings(config) {
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.8.0;
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.aicetus.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

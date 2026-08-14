@@ -1,0 +1,10 @@
+{
+  "currency": "CNY",
+  "unit": "1M tokens",
+  "defaultModel": "deepseek-v4-flash",
+  "models": {
+    "deepseek-chat": { "input": 2, "output": 8, "cacheRead": 0.5 },
+    "deepseek-reasoner": { "input": 4, "output": 16, "cacheRead": 1 },
+    "deepseek-v4-flash": { "input": 2, "output": 8, "cacheRead": 0.5 }
+  }
+}
