@@ -85,20 +85,20 @@
 
 ---
 
-## 6. 截图建议（最多 10 张，已 resize 到 1290×2796）
+## 6. 截图（最终确认 ✅，6 张，1290×2796）
 
-> 全部 16 张已处理好在 `screenshots/` 目录。建议按以下顺序精选 6 张（展示核心价值）：
+> 用户提供终稿（`ui设计/design/appstore-screenshots/`），全部已为官方尺寸，按顺序整理在 `screenshots/final/`：
 
-| 顺序 | 文件 | 内容预期 |
+| 上架顺序 | 文件 | 原始文件 |
 |---|---|---|
-| 1（首图） | `app-launch.png` | 启动/主界面，第一印象 |
-| 2 | `app-connected.png` | 已连接状态，建立"连接 Mac"心智 |
-| 3 | `ios-v3.png` | 最新版会话界面 |
-| 4 | `ios-v2-paired.png` | 扫码配对流程 |
-| 5 | `diag-homescreen.png` | 主页仪表盘 |
-| 6 | `app-2.png` | 功能展示 |
+| 1（首图） | `screenshots/final/01.png` | shot-s1.png |
+| 2 | `screenshots/final/02.png` | shot-s2.png |
+| 3 | `screenshots/final/03.png` | shot-s3.png |
+| 4 | `screenshots/final/04.png` | shot-s4.png |
+| 5 | `screenshots/final/05.png` | shot-s5.png |
+| 6 | `screenshots/final/06.png` | shot-s6.png |
 
-> ⚠️ 建议逐张肉眼确认内容与顺序；diag-* 系列疑似诊断截图，可能不适合对外展示，可替换。
+> 上架时按 01→06 顺序上传（`asc screenshots upload`）。
 
 ---
 

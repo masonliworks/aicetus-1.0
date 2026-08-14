@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>掌中鲸 · App Store 截图展板（6 张，1290×2796）</title>
+<style>
+/* ===== 屏幕样式：合并自 dsh-remote-ios.html / dsh-remote-ios-p1.html ===== */
+.phone{
+  --bg:#F2F2F7; --surface:#FFFFFF; --raised:#FFFFFF;
+  --t1:#000000; --t2:rgba(60,60,67,.6); --t3:rgba(60,60,67,.3);
+  --div:rgba(60,60,67,.12);
+  --accent:#0A84FF; --run:#30D158; --idle:#8E8E93; --wait:#FF9F0A; --danger:#FF3B30; --done:#007AFF;
+  --wait-bg:rgba(255,159,10,.10);
+}
+.phone.dk{
+  --bg:#000000; --surface:#1C1C1E; --raised:#2C2C2E;
+  --t1:#FFFFFF; --t2:rgba(235,235,245,.6); --t3:rgba(235,235,245,.3);
+  --div:rgba(84,84,88,.65);
+  --accent:#0A84FF; --run:#30D158; --idle:#98989D; --wait:#FFD60A; --danger:#FF453A; --done:#0A84FF;
+  --wait-bg:rgba(255,214,10,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+.mono{font-family:ui-monospace,"SF Mono",Menlo,monospace}
+.phone{width:390px;height:844px;background:#1C1C1E;border-radius:56px;padding:10px;box-shadow:0 24px 60px -16px rgba(20,40,60,.35);flex:none}
+.scr{width:100%;height:100%;border-radius:46px;background:var(--bg);overflow:hidden;position:relative;display:flex;flex-direction:column;color:var(--t1);font-family:-apple-system,"SF Pro Text","PingFang SC","Helvetica Neue",sans-serif}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:114px;height:32px;background:#1C1C1E;border-radius:18px;z-index:30}
+.sbar{height:54px;flex:none;display:flex;align-items:flex-end;justify-content:space-between;padding:0 32px 8px;font-size:15px;font-weight:600;position:relative;z-index:25}
+.sbar .ic{display:flex;gap:6px;align-items:center}
+.gbanner{flex:none;height:32px;display:flex;align-items:center;justify-content:center;gap:6px;font-size:12px;color:var(--t2);background:color-mix(in srgb,var(--surface) 82%,transparent);border-bottom:.5px solid var(--div)}
+.sdot{width:8px;height:8px;border-radius:50%;flex:none}
+.navbar{flex:none;display:flex;align-items:center;justify-content:space-between;padding:10px 16px 12px;background:var(--bg)}
+.navbar .ttl{font-size:17px;font-weight:600}
+.navbar.inline{justify-content:center;position:relative;padding-top:6px;padding-bottom:10px;border-bottom:.5px solid var(--div)}
+.navbar.inline .back{position:absolute;left:8px;color:var(--accent);font-size:15px;display:flex;align-items:center;gap:2px}
+.list{flex:1;overflow:hidden;padding:0 16px}
+.ws-head{display:flex;align-items:center;gap:6px;padding:14px 2px 6px}
+.ws-head .nm{font-size:12px;font-weight:600;color:var(--t1)}
+.ws-head .pt{font-size:11px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow{background:var(--surface);border-radius:12px;padding:11px 12px;margin-bottom:8px;display:flex;gap:10px}
+.srow .l{flex:1;min-width:0}
+.srow .t{font-size:17px;font-weight:600;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow .st{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--t2);margin-top:4px}
+.preset{font-size:11px;color:var(--t2);border:1px solid var(--div);border-radius:999px;padding:1px 8px}
+.goal-line{font-size:13px;color:var(--t2);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.srow .r{display:flex;flex-direction:column;align-items:flex-end;justify-content:space-between;flex:none}
+.appr-badge{display:flex;align-items:center;gap:3px;color:#fff;background:var(--danger);border-radius:999px;font-size:12px;font-weight:600;padding:2px 8px}
+.time{font-size:11px;color:var(--t3)}
+.tabbar{flex:none;height:83px;background:color-mix(in srgb,var(--surface) 88%,transparent);border-top:.5px solid var(--div);display:flex;padding:10px 0 24px}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10px;color:var(--idle);position:relative}
+.tab.on{color:var(--accent)}
+.tbadge{position:absolute;top:-2px;left:calc(50% + 8px);min-width:17px;height:17px;border-radius:9px;background:var(--danger);color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;padding:0 5px}
+.msgs{flex:1;overflow:hidden;padding:10px 16px 6px;display:flex;flex-direction:column;gap:8px}
+.bub{max-width:78%;padding:9px 13px;border-radius:16px;font-size:15px;line-height:1.4}
+.bub.u{align-self:flex-end;background:color-mix(in srgb,var(--accent) 15%,transparent);border-bottom-right-radius:4px}
+.bub.a{align-self:flex-start;background:var(--surface);max-width:88%;border-bottom-left-radius:4px}
+.drawer{font-size:12px;color:var(--t2);display:flex;align-items:center;gap:5px;padding:5px 0}
+.drawer .st-ic{margin-left:auto}
+.tool-open{background:color-mix(in srgb,var(--idle) 10%,transparent);border-radius:8px;padding:8px 10px;margin:4px 0 2px}
+.tool-open .code{font-size:12px;line-height:1.5;word-break:break-all}
+.stream-tag{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--t2);margin-bottom:4px}
+.breath{animation:breath 1.8s ease-in-out infinite}
+@keyframes breath{0%,100%{opacity:1}50%{opacity:.45}}
+.caret{display:inline-block;width:8px;height:15px;background:var(--accent);border-radius:2px;vertical-align:-2px}
+.queue-sec{flex:none;padding:4px 16px;display:flex;flex-direction:column;gap:6px;background:color-mix(in srgb,var(--surface) 82%,transparent)}
+.qcard{background:var(--surface);border-radius:12px;padding:9px 11px;display:flex;gap:9px;align-items:flex-start}
+.qcard .qt{flex:1;font-size:15px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.qtag{flex:none;font-size:11px;font-weight:600;border-radius:999px;padding:2px 8px;margin-top:1px}
+.qops{display:flex;gap:12px;flex:none;margin-top:2px}
+.strip{flex:none;margin:0 16px;background:var(--surface);border-radius:12px;padding:8px 11px;font-size:12px;display:flex;align-items:center;gap:7px;color:var(--t1)}
+.strip .ops{margin-left:auto;display:flex;gap:12px;color:var(--t2)}
+.appr{flex:none;margin:0 16px;background:var(--wait-bg);border-radius:12px;padding:10px 12px}
+.appr .ah{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600}
+.appr .rsn{font-size:15px;color:var(--t2);margin:6px 0 10px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.appr .btns{display:flex;gap:10px}
+.btn{flex:1;text-align:center;font-size:15px;font-weight:600;padding:8px 0;border-radius:10px}
+.btn.deny{color:var(--danger);border:1px solid var(--danger)}
+.btn.ok{color:#fff;background:var(--accent)}
+.infobar{flex:none;display:flex;align-items:center;gap:12px;padding:7px 16px;background:color-mix(in srgb,var(--surface) 82%,transparent);border-top:.5px solid var(--div);font-size:12px;color:var(--t2)}
+.model-cap{display:flex;align-items:center;gap:5px;background:var(--raised);border:1px solid var(--div);border-radius:999px;padding:4px 10px;font-size:12px;color:var(--t1)}
+.ring{position:relative;width:18px;height:18px;flex:none}
+.composer{flex:none;display:flex;align-items:flex-end;gap:8px;padding:8px 12px 22px;background:color-mix(in srgb,var(--surface) 88%,transparent);border-top:.5px solid var(--div)}
+.mode{width:40px;flex:none;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;border-radius:10px;padding:6px 0;color:var(--t2);background:var(--raised);border:1px solid var(--div)}
+.mode.hot{color:#fff;background:var(--accent);border-color:var(--accent)}
+.field{flex:1;min-height:36px;background:var(--raised);border:1px solid var(--div);border-radius:18px;padding:8px 14px;font-size:15px;color:var(--t3)}
+.send{width:36px;height:36px;flex:none;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center}
+.send.stop{background:var(--danger)}
+.pop{position:absolute;left:16px;bottom:150px;width:300px;background:var(--raised);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.35);z-index:40;overflow:hidden}
+.pop .ph{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:.5px solid var(--div);font-size:13px;font-weight:600}
+.pop .grp{font-size:11px;font-weight:600;color:var(--t2);padding:9px 14px 3px;letter-spacing:.04em}
+.pop .it{display:flex;align-items:center;gap:9px;padding:9px 14px;font-size:14px}
+.pop .it .eff{margin-left:auto;font-size:11px;color:var(--t3)}
+.ck{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--t3);flex:none;display:flex;align-items:center;justify-content:center}
+.ck.on{background:var(--accent);border-color:var(--accent)}
+.dim{position:absolute;inset:0;background:rgba(0,0,0,.35);z-index:35}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:40;background:var(--raised);border-radius:16px 16px 0 0;padding:8px 0 26px;box-shadow:0 -8px 40px rgba(0,0,0,.2)}
+.grab{width:36px;height:5px;border-radius:3px;background:var(--t3);margin:2px auto 10px}
+.sheet-h{display:flex;align-items:center;justify-content:space-between;padding:4px 16px 12px;font-size:17px;font-weight:600}
+.sheet-h .act{font-size:15px;font-weight:400;color:var(--accent)}
+.pick-sec{font-size:12px;font-weight:600;color:var(--t2);padding:4px 16px 6px;letter-spacing:.04em}
+.pick{background:var(--surface);border:1px solid var(--div);border-radius:12px;margin:0 16px 4px;overflow:hidden}
+.pick .it{display:flex;align-items:center;gap:10px;padding:11px 13px;font-size:15px}
+.pick .it + .it{border-top:.5px solid var(--div)}
+.pick .it .ds{flex:1;font-size:12px;color:var(--t2);margin-top:1px}
+.group{margin:0 16px 18px}
+.group .gt{font-size:12px;color:var(--t2);padding:0 14px 6px}
+.gcard{background:var(--surface);border-radius:12px;overflow:hidden}
+.grow{display:flex;align-items:center;gap:10px;padding:11px 14px;font-size:15px}
+.grow + .grow{border-top:.5px solid var(--div)}
+.grow .val{margin-left:auto;color:var(--t2);font-size:14px;display:flex;align-items:center;gap:6px;min-width:0}
+.big-btn{display:block;margin:0 16px;background:var(--accent);color:#fff;text-align:center;font-size:16px;font-weight:600;border-radius:12px;padding:13px 0}
+.footnote{font-size:12px;color:var(--t3);padding:0 20px 4px;line-height:1.5}
+.finder{flex:1;position:relative;background:#0A0A0C}
+.finder .frame{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:230px;height:230px}
+.finder .frame i{position:absolute;width:34px;height:34px;border:3.5px solid var(--accent)}
+.finder .frame i:nth-child(1){left:0;top:0;border-right:none;border-bottom:none;border-radius:14px 0 0 0}
+.finder .frame i:nth-child(2){right:0;top:0;border-left:none;border-bottom:none;border-radius:0 14px 0 0}
+.finder .frame i:nth-child(3){left:0;bottom:0;border-right:none;border-top:none;border-radius:0 0 0 14px}
+.finder .frame i:nth-child(4){right:0;bottom:0;border-left:none;border-top:none;border-radius:0 0 14px 0}
+.scanline{position:absolute;left:14px;right:14px;height:2px;background:var(--accent);border-radius:2px;top:50%;box-shadow:0 0 12px var(--accent)}
+
+/* ===== 截图画板 ===== */
+:root{--brand:#2563EB;--brand-deep:#1E40AF}
+body{background:#DDE5EE;font-family:-apple-system,"SF Pro Text","PingFang SC","Helvetica Neue",sans-serif;display:flex;flex-wrap:wrap;gap:32px;padding:40px;justify-content:center}
+.shot{
+  width:430px;height:932px;flex:none;overflow:hidden;position:relative;
+  display:flex;flex-direction:column;align-items:center;
+  background:linear-gradient(175deg,#FFFFFF 0%,#EEF3FC 58%,#E2EBFA 100%);
+}
+.shot.dk{background:linear-gradient(175deg,#0B1E33 0%,#10294A 60%,#143361 100%)}
+.cap-zone{padding:42px 30px 0;text-align:center;flex:none}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;
+  letter-spacing:.18em;color:var(--brand);margin-bottom:14px;
+}
+.shot.dk .eyebrow{color:#7FA8F8}
+.eyebrow img{width:18px;height:18px;border-radius:5px}
+.hl{font-size:31px;font-weight:800;letter-spacing:.01em;line-height:1.28;color:#0F172A}
+.shot.dk .hl{color:#FFFFFF}
+.hl em{font-style:normal;color:var(--brand)}
+.shot.dk .hl em{color:#8DB4FF}
+.sub2{font-size:13.5px;color:#64748B;margin-top:10px;letter-spacing:.02em}
+.shot.dk .sub2{color:rgba(255,255,255,.55)}
+.phone-zone{flex:1;width:100%;display:flex;justify-content:center;align-items:flex-start;padding-top:26px;overflow:hidden}
+.phone-zone .phone{transform:scale(.88);transform-origin:top center;margin-bottom:-80px}
+
+/* ===== 单屏导出模式 ===== */
+body.shot-mode{display:block;padding:0;background:#fff}
+body.shot-mode .shot{display:none}
+body.shot-mode .shot.on{display:flex}
+</style>
+</head>
+<body>
+
+<!-- ========== 1 会话列表 ========== -->
+<div class="shot" data-shot="s1">
+  <div class="cap-zone">
+    <span class="eyebrow"><img src="../site/assets/logo-mark.png">掌中鲸</span>
+    <div class="hl">AI 员工跑到哪了<br><em>扫一眼就知道</em></div>
+    <div class="sub2">会话状态 · 目标进度 · 待审批数，一屏总览</div>
+  </div>
+  <div class="phone-zone"><div class="phone"><div class="scr">
+    <div class="island"></div>
+    <div class="sbar"><span>9:41</span><span class="ic">
+      <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 000-4z" fill="currentColor" opacity=".4"/></svg>
+    </span></div>
+    <div class="gbanner"><span class="sdot" style="background:var(--run)"></span>已连接 · 2 个会话运行中 · deepseek-v4</div>
+    <div class="navbar"><span class="ttl" style="font-size:28px;font-weight:700">会话</span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+    </div>
+    <div class="list">
+      <div class="ws-head"><span style="font-size:13px">📁</span><span class="nm">harness</span><span class="pt mono">~/Projects/harness</span></div>
+      <div class="srow">
+        <div class="l">
+          <div class="t">重构 auth 模块</div>
+          <div class="st"><span class="sdot" style="background:var(--wait)"></span>待审批<span class="preset">code-reviewer</span></div>
+          <div class="goal-line">🎯 完成 session 服务抽离并通过测试</div>
+        </div>
+        <div class="r">
+          <span class="appr-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l8 3.5V11c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V5.5L12 2z"/></svg>1</span>
+          <span class="time">2分钟前</span>
+        </div>
+      </div>
+      <div class="srow">
+        <div class="l">
+          <div class="t">修复 CI 流水线</div>
+          <div class="st"><span class="sdot" style="background:var(--run)"></span>运行中<span class="preset">default</span></div>
+        </div>
+        <div class="r"><span></span><span class="time">18分钟前</span></div>
+      </div>
+      <div class="ws-head"><span style="font-size:13px">📁</span><span class="nm">wechat-crawler</span><span class="pt mono">~/Projects/wechat-crawler</span></div>
+      <div class="srow">
+        <div class="l">
+          <div class="t">给爬虫加代理池</div>
+          <div class="st"><span class="sdot" style="background:var(--run)"></span>运行中<span class="preset">default</span></div>
+          <div class="goal-line">🎯 支持按地区轮换出口 IP</div>
+        </div>
+        <div class="r">
+          <span class="appr-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l8 3.5V11c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V5.5L12 2z"/></svg>2</span>
+          <span class="time">5分钟前</span>
+        </div>
+      </div>
+      <div class="srow" style="opacity:.7">
+        <div class="l">
+          <div class="t">整理周报素材</div>
+          <div class="st"><span class="sdot" style="background:var(--idle)"></span>空闲<span class="preset">writer</span></div>
+        </div>
+        <div class="r"><span></span><span class="time">1小时前</span></div>
+      </div>
+    </div>
+    <div class="tabbar">
+      <div class="tab on">
+        <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M21 12a8 8 0 01-8 8H4l2-3a8 8 0 1115-5z"/></svg>会话
+        <span class="tbadge">3</span>
+      </div>
+      <div class="tab">
+        <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 00.3 1.9l.1.1a2 2 0 11-2.9 2.9l-.1-.1a1.7 1.7 0 00-1.9-.3 1.7 1.7 0 00-1 1.5V21a2 2 0 11-4 0v-.2a1.7 1.7 0 00-1.1-1.5 1.7 1.7 0 00-1.9.3l-.1.1a2 2 0 11-2.9-2.9l.1-.1a1.7 1.7 0 00.3-1.9 1.7 1.7 0 00-1.5-1H3a2 2 0 110-4h.2a1.7 1.7 0 001.5-1.1 1.7 1.7 0 00-.3-1.9l-.1-.1a2 2 0 112.9-2.9l.1.1a1.7 1.7 0 001.9.3h.1a1.7 1.7 0 001-1.5V3a2 2 0 114 0v.2a1.7 1.7 0 001 1.5h.1a1.7 1.7 0 001.9.3h.1a1.7 1.7 0 001.9-.3l.1-.1a2 2 0 112.9 2.9l-.1.1a1.7 1.7 0 00.3-1.9v.1a1.7 1.7 0 001.5 1h.2a2 2 0 110 4h-.2a1.7 1.7 0 00-1.5 1h.2a2 2 0 110 4h-.2a1.7 1.7 0 00-1.5 1z"/></svg>设置
+      </div>
+    </div>
+  </div></div></div>
+</div>
+
+<!-- ========== 2 会话详情 · 审批 ========== -->
+<div class="shot" data-shot="s2">
+  <div class="cap-zone">
+    <span class="eyebrow"><img src="../site/assets/logo-mark.png">掌中鲸</span>
+    <div class="hl">高危命令<br><em>你点头才算数</em></div>
+    <div class="sub2">审批 · 目标 · 任务 · 队列，尽在掌握</div>
+  </div>
+  <div class="phone-zone"><div class="phone"><div class="scr">
+    <div class="island"></div>
+    <div class="sbar"><span>9:41</span><span class="ic">
+      <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 000-4z" fill="currentColor" opacity=".4"/></svg>
+    </span></div>
+    <div class="gbanner"><span class="sdot" style="background:var(--run)"></span>已连接 · 2 个会话运行中 · deepseek-v4</div>
+    <div class="navbar inline">
+      <span class="back"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg></span>
+      <span style="text-align:center"><span class="ttl" style="font-size:15px">重构 auth 模块</span><br><span style="font-size:11px;color:var(--t2)">harness · code-reviewer</span></span>
+    </div>
+    <div class="msgs">
+      <div class="bub u">把 session 管理抽成独立服务，别动 .env</div>
+      <div class="bub a">
+        <div class="drawer"><span>›</span>🧠 思考过程</div>
+        <div class="drawer"><span>›</span>🔧 Bash · 找到 14 处引用，集中在 session.ts<span class="st-ic" style="color:var(--run)">✓</span></div>
+        <div class="tool-open">
+          <div class="drawer" style="padding:0 0 5px"><span style="transform:rotate(90deg);display:inline-block">›</span>🔧 Read · src/auth/session.ts<span class="st-ic" style="color:var(--run)">✓</span></div>
+          <div class="code mono" style="color:var(--t2)">export class SessionManager {<br>&nbsp;&nbsp;private store: TokenStore;<br>&nbsp;&nbsp;async refresh(token: string) …</div>
+        </div>
+        <div style="margin-top:4px">方案：新建 <span class="mono" style="font-size:13px">SessionService</span>，jwt 升到 v9。需要重装依赖。</div>
+      </div>
+      <div class="bub a breath" style="max-width:88%">
+        <div class="stream-tag">🧠 思考中… <span style="color:var(--t3)">对比 jsonwebtoken v8/v9 的 API 差异…</span></div>
+        <div>正在升级依赖，预计改动 3 个文件<span class="caret"></span></div>
+      </div>
+    </div>
+    <div class="queue-sec">
+      <div class="qcard">
+        <span class="qtag" style="background:color-mix(in srgb,var(--wait) 15%,transparent);color:var(--wait)">⏱ 排队中</span>
+        <div class="qt">顺便把登录页的报错提示也统一成 toast</div>
+        <div class="qops">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--t2)" stroke-width="1.8" stroke-linecap="round"><path d="M17 3a2.8 2.8 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--danger)" stroke-width="1.8" stroke-linecap="round"><path d="M3 6h18M8 6V4h8v2M6 6l1 14a2 2 0 002 2h6a2 2 0 002-2l1-14"/></svg>
+        </div>
+      </div>
+    </div>
+    <div style="flex:none;display:flex;flex-direction:column;gap:6px;padding:6px 0">
+      <div class="strip">🎯 <span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">完成 session 服务抽离并通过测试</span>
+        <span class="ops">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </span>
+      </div>
+    </div>
+    <div class="appr">
+      <div class="ah" style="color:var(--wait)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l8 3.5V11c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V5.5L12 2z"/></svg>
+        工具调用待审批<span class="preset mono" style="margin-left:2px">Bash</span>
+      </div>
+      <div class="rsn">需要执行 <span class="mono" style="font-size:13px">npm install</span> 以升级 jsonwebtoken 到 v9（工作目录 ~/Projects/harness）</div>
+      <div class="btns"><span class="btn deny">拒绝</span><span class="btn ok">允许一次</span></div>
+    </div>
+    <div class="infobar" style="margin-top:6px">
+      <span class="model-cap">🖥 deepseek-v4 · High
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </span>
+      <span style="display:flex;align-items:center;gap:5px">
+        <span class="ring"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="var(--div)" stroke-width="2.5"/><circle cx="9" cy="9" r="7" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="17" transform="rotate(-90 9 9)"/></svg></span>
+        上下文 62%
+      </span>
+      <span style="margin-left:auto;display:flex;align-items:center;gap:3px;color:var(--accent);font-weight:600">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>命令
+      </span>
+    </div>
+    <div class="composer">
+      <div class="mode">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/><path d="M18 16l3 2-3 2v-4z" fill="currentColor" stroke="none"/></svg>
+        排队
+      </div>
+      <div class="field">发消息…</div>
+      <div class="send stop">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><rect x="6" y="6" width="12" height="12" rx="2.5"/></svg>
+      </div>
+    </div>
+  </div></div></div>
+</div>
+
+<!-- ========== 3 插话 + 提问卡（深色） ========== -->
+<div class="shot dk" data-shot="s3">
+  <div class="cap-zone">
+    <span class="eyebrow"><img src="../site/assets/logo-mark.png">掌中鲸</span>
+    <div class="hl">想到就说<br><em>排队插话两相宜</em></div>
+    <div class="sub2">不打断的排队 · 立即纠偏的插话</div>
+  </div>
+  <div class="phone-zone"><div class="phone dk"><div class="scr">
+    <div class="island"></div>
+    <div class="sbar"><span>9:41</span><span class="ic">
+      <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 000-4z" fill="currentColor" opacity=".4"/></svg>
+    </span></div>
+    <div class="gbanner"><span class="sdot" style="background:var(--run)"></span>已连接 · 1 个会话运行中 · deepseek-v4</div>
+    <div class="navbar inline">
+      <span class="back"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg></span>
+      <span style="text-align:center"><span class="ttl" style="font-size:15px">给爬虫加代理池</span><br><span style="font-size:11px;color:var(--t2)">wechat-crawler · default</span></span>
+    </div>
+    <div class="msgs">
+      <div class="bub u">代理池要支持按地区轮换</div>
+      <div class="bub a">
+        <div class="drawer"><span>›</span>🧠 思考过程</div>
+        <div class="drawer"><span>›</span>🔧 Edit · proxy_pool.py +86 行<span class="st-ic" style="color:var(--run)">✓</span></div>
+        <div style="margin-top:4px">已加 <span class="mono" style="font-size:13px">RegionRotator</span>，支持省份级轮换。要我把延迟也纳入打分吗？</div>
+      </div>
+      <div class="bub a">
+        <div style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--wait);margin-bottom:6px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><text x="12" y="16.5" text-anchor="middle" font-size="13" font-weight="700" fill="#000">?</text></svg>
+          Agent 提问
+        </div>
+        <div style="font-size:15px;line-height:1.4">代理源用哪一个？</div>
+        <div style="display:flex;flex-direction:column;gap:6px;margin-top:9px;font-size:14px">
+          <span style="display:flex;align-items:center;gap:8px"><span class="ck on"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span>站大爷（已有账号）</span>
+          <span style="display:flex;align-items:center;gap:8px;color:var(--t2)"><span class="ck"></span>快代理</span>
+          <span style="display:flex;align-items:center;gap:8px;color:var(--t2)"><span class="ck"></span>自建机房</span>
+        </div>
+        <div class="btns" style="display:flex;gap:10px;margin-top:11px"><span class="btn ok" style="padding:7px 0">提交</span><span class="btn" style="border:1px solid var(--div);color:var(--t2);padding:7px 0">跳过</span></div>
+      </div>
+    </div>
+    <div style="flex:none;display:flex;flex-direction:column;gap:6px;padding:6px 0">
+      <div class="strip">🎯 <span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">支持按地区轮换出口 IP</span>
+        <span class="ops">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </span>
+      </div>
+    </div>
+    <div class="infobar" style="margin-top:6px">
+      <span class="model-cap" style="border-color:var(--accent)">🖥 deepseek-v4 · High
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </span>
+      <span style="display:flex;align-items:center;gap:5px">
+        <span class="ring"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="var(--div)" stroke-width="2.5"/><circle cx="9" cy="9" r="7" fill="none" stroke="var(--wait)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="6" transform="rotate(-90 9 9)"/></svg></span>
+        <span style="color:var(--wait)">上下文 87%</span>
+      </span>
+      <span style="margin-left:auto;display:flex;align-items:center;gap:3px;color:var(--accent);font-weight:600">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>命令
+      </span>
+    </div>
+    <div class="composer">
+      <div class="mode hot">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        插话
+      </div>
+      <div class="field">打断当前任务，先说这个…</div>
+      <div class="send">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+      </div>
+    </div>
+  </div></div></div>
+</div>
+
+<!-- ========== 4 模型切换（深色 popover） ========== -->
+<div class="shot dk" data-shot="s4">
+  <div class="cap-zone">
+    <span class="eyebrow"><img src="../site/assets/logo-mark.png">掌中鲸</span>
+    <div class="hl">模型与思考强度<br><em>随手切换</em></div>
+    <div class="sub2">上下文用量圆环，快满了会提醒你</div>
+  </div>
+  <div class="phone-zone"><div class="phone dk"><div class="scr">
+    <div class="island"></div>
+    <div class="sbar"><span>9:41</span><span class="ic">
+      <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 000-4z" fill="currentColor" opacity=".4"/></svg>
+    </span></div>
+    <div class="gbanner"><span class="sdot" style="background:var(--run)"></span>已连接 · 1 个会话运行中 · deepseek-v4</div>
+    <div class="navbar inline">
+      <span class="back"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M15 19l-7-7 7-7"/></svg></span>
+      <span style="text-align:center"><span class="ttl" style="font-size:15px">给爬虫加代理池</span><br><span style="font-size:11px;color:var(--t2)">wechat-crawler · default</span></span>
+    </div>
+    <div class="msgs">
+      <div class="bub u">代理池要支持按地区轮换</div>
+      <div class="bub a">
+        <div class="drawer"><span>›</span>🧠 思考过程</div>
+        <div class="drawer"><span>›</span>🔧 Edit · proxy_pool.py +86 行<span class="st-ic" style="color:var(--run)">✓</span></div>
+        <div style="margin-top:4px">已加 <span class="mono" style="font-size:13px">RegionRotator</span>，支持省份级轮换。</div>
+      </div>
+    </div>
+    <div style="flex:none;display:flex;flex-direction:column;gap:6px;padding:6px 0">
+      <div class="strip">🎯 <span style="flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">支持按地区轮换出口 IP</span>
+        <span class="ops">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg>
+        </span>
+      </div>
+    </div>
+    <div class="infobar" style="margin-top:6px">
+      <span class="model-cap" style="border-color:var(--accent)">🖥 deepseek-v4 · High
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+      </span>
+      <span style="display:flex;align-items:center;gap:5px">
+        <span class="ring"><svg width="18" height="18" viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" fill="none" stroke="var(--div)" stroke-width="2.5"/><circle cx="9" cy="9" r="7" fill="none" stroke="var(--wait)" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="44" stroke-dashoffset="6" transform="rotate(-90 9 9)"/></svg></span>
+        <span style="color:var(--wait)">上下文 87%</span>
+      </span>
+      <span style="margin-left:auto;display:flex;align-items:center;gap:3px;color:var(--accent);font-weight:600">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>命令
+      </span>
+    </div>
+    <div class="composer">
+      <div class="mode">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/><path d="M18 16l3 2-3 2v-4z" fill="currentColor" stroke="none"/></svg>
+        排队
+      </div>
+      <div class="field">发消息…</div>
+      <div class="send">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+      </div>
+    </div>
+    <div class="pop">
+      <div class="ph">模型与思考强度
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--t2)" stroke-width="2.2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </div>
+      <div class="grp">DEEPSEEK</div>
+      <div class="it"><span class="ck on"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span>deepseek-v4<span class="eff">思考强度 · High</span></div>
+      <div class="it"><span class="ck"></span>deepseek-v4-pro<span class="eff">思考强度 · Max</span></div>
+      <div class="it"><span class="ck"></span>deepseek-v4-flash<span class="eff">思考强度 · Off</span></div>
+      <div class="grp">其他 PROVIDER</div>
+      <div class="it" style="opacity:.55"><span class="ck"></span>qwen3-max<span class="eff">思考强度 · Off</span></div>
+    </div>
+  </div></div></div>
+</div>
+
+<!-- ========== 5 扫码配对 ========== -->
+<div class="shot dk" data-shot="s5">
+  <div class="cap-zone">
+    <span class="eyebrow"><img src="../site/assets/logo-mark.png">掌中鲸</span>
+    <div class="hl">扫个码<br><em>手机就连上 Mac</em></div>
+    <div class="sub2">局域网直连 · 你的代码不过云端</div>
+  </div>
+  <div class="phone-zone"><div class="phone dk"><div class="scr">
+    <div class="island"></div>
+    <div class="sbar" style="color:#fff"><span>9:41</span><span class="ic">
+      <svg width="17" height="11" viewBox="0 0 17 11" fill="#fff"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="#fff" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="2" fill="#fff"/><path d="M23 4v4a2.2 2.2 0 000-4z" fill="#fff" opacity=".4"/></svg>
+    </span></div>
+    <div style="flex:none;display:flex;justify-content:space-between;align-items:center;padding:4px 16px 10px;color:#fff;background:#0A0A0C">
+      <span style="color:var(--accent);font-size:15px">取消</span>
+      <span style="font-size:15px;font-weight:600">扫码配对</span>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round"><path d="M13 2L4.5 13.5H11L9.5 22 19 9.5h-6.5L13 2z"/></svg>
+    </div>
+    <div class="finder">
+      <div class="frame"><i></i><i></i><i></i><i></i><div class="scanline"></div></div>
+      <div style="position:absolute;left:0;right:0;top:calc(44% + 135px);text-align:center;color:#fff">
+        <div style="font-size:15px;font-weight:600">对准 Mac 伴侣 App 中的二维码</div>
+        <div style="font-size:12.5px;opacity:.6;margin-top:6px">识别 dshremote:// 后自动填充地址与 Token<br>连接成功时震动反馈</div>
+      </div>
+    </div>
+    <div style="flex:none;background:#0A0A0C;padding:14px 16px 34px;text-align:center">
+      <span style="font-size:13px;color:rgba(255,255,255,.65)">无法扫码？<span style="color:var(--accent)">手动输入地址与 Token</span></span>
+    </div>
+  </div></div></div>
+</div>
+
+<!-- ========== 6 新建会话 sheet ========== -->
+<div class="shot" data-shot="s6">
+  <div class="cap-zone">
+    <span class="eyebrow"><img src="../site/assets/logo-mark.png">掌中鲸</span>
+    <div class="hl">一句话<br><em>给 AI 派个新活</em></div>
+    <div class="sub2">工作区 + Agent 预设，点选即建</div>
+  </div>
+  <div class="phone-zone"><div class="phone"><div class="scr">
+    <div class="island"></div>
+    <div class="sbar"><span>9:41</span><span class="ic">
+      <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+      <svg width="25" height="12" viewBox="0 0 25 12" fill="none"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="2" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 000-4z" fill="currentColor" opacity=".4"/></svg>
+    </span></div>
+    <div class="gbanner"><span class="sdot" style="background:var(--run)"></span>已连接 · 2 个会话运行中 · deepseek-v4</div>
+    <div class="navbar"><span class="ttl" style="font-size:28px;font-weight:700">会话</span></div>
+    <div class="list" style="flex:none">
+      <div class="ws-head"><span style="font-size:13px">📁</span><span class="nm">harness</span><span class="pt mono">~/Projects/harness</span></div>
+      <div class="srow"><div class="l"><div class="t">重构 auth 模块</div><div class="st"><span class="sdot" style="background:var(--wait)"></span>待审批<span class="preset">code-reviewer</span></div></div></div>
+    </div>
+    <div class="dim"></div>
+    <div class="sheet">
+      <div class="grab"></div>
+      <div class="sheet-h"><span class="act">取消</span>新建会话<span class="act" style="font-weight:600">创建</span></div>
+      <div class="pick-sec">工作区</div>
+      <div class="pick">
+        <div class="it"><span class="ck on"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>harness</span><span class="val mono" style="margin-left:auto;font-size:12px;color:var(--t3)">~/Projects/harness</span></div>
+        <div class="it"><span class="ck"></span><span>wechat-crawler</span><span class="val mono" style="margin-left:auto;font-size:12px;color:var(--t3)">~/Projects/wechat-crawler</span></div>
+        <div class="it"><span class="ck"></span><span style="color:var(--t2)">不指定工作区</span></div>
+      </div>
+      <div class="pick-sec" style="margin-top:10px">AGENT 预设</div>
+      <div class="pick">
+        <div class="it"><span class="ck on"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span style="flex:none">default</span><span class="ds">通用预设，适合大多数任务</span></div>
+        <div class="it"><span class="ck"></span><span style="flex:none">code-reviewer</span><span class="ds">先给方案再动手，改动逐条确认</span></div>
+        <div class="it"><span class="ck"></span><span style="flex:none">writer</span><span class="ds">文案与整理向，减少命令执行</span></div>
+      </div>
+    </div>
+  </div></div></div>
+</div>
+
+<script>
+// 单屏导出模式：?shot=s1…s6
+const q = new URLSearchParams(location.search).get('shot');
+if (q) {
+  document.body.classList.add('shot-mode');
+  const el = document.querySelector(`[data-shot="${q}"]`);
+  if (el) el.classList.add('on');
+}
+</script>
+</body>
+</html>
