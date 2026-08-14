@@ -108,3 +108,10 @@ ipconfig getifaddr en0           # 查 Mac 局域网 IP
 当前版本在 App 运行时通过事件流触发本地通知。要做到 App 完全退出的推送：
 桥接服务增加推送端点 → APNs，App 注册远程通知上报 device token。架构已预留
 （`AppState.notify` 统一入口），需要 Apple Developer 账号 + 推送证书。
+
+## 下载与授权
+
+- **安装包下载**：见右侧 **Releases**（GitHub Releases），当前版本 `掌中鲸伴侣-0.8.0.dmg`。
+- **授权声明**：本仓库代码**未采用任何开源许可证（All Rights Reserved）**。仅供浏览与学习参考；
+  任何形式的使用、复制、修改、分发或商业利用，均需事先取得作者书面授权。
+- **联系授权**：`depth.carols19@icloud.com`
