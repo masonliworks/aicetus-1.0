@@ -113,5 +113,15 @@
   <div class="wrap">© 2026 掌中鲸 · <a href="index.html" style="color:inherit">aicetus.cn</a></div>
 </footer>
 
+<script>
+  /* 访问统计:静默上报,不影响页面 */
+  (function(){
+    try{
+      if(navigator.sendBeacon){ navigator.sendBeacon('/api/track/visit', new Blob(['1'],{type:'text/plain'})); }
+      else{ fetch('/api/track/visit',{method:'GET',keepalive:true,cache:'no-store'}); }
+    }catch(e){}
+  })();
+</script>
+
 </body>
 </html>

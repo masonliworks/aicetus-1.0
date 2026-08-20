@@ -41,9 +41,9 @@
 	<key>NSBonjourServices</key>
 	<array/>
 	<key>NSCameraUsageDescription</key>
-	<string>用于扫描 Mac 端显示的配对二维码，自动完成连接配置。</string>
+	<string>用于扫描电脑端显示的配对二维码，自动完成连接配置。</string>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>需要访问局域网以连接 Mac 上的 DSH 桥接服务。</string>
+	<string>需要访问局域网以连接电脑上的 DSH 桥接服务。</string>
 	<key>UILaunchScreen</key>
 	<dict/>
 	<key>UIRequiredDeviceCapabilities</key>

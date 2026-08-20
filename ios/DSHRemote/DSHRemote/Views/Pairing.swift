@@ -58,7 +58,7 @@ struct QRScannerView: View {
 
             VStack {
                 Spacer()
-                Text("对准 Mac 伴侣 App 中的二维码")
+                Text("对准电脑伴侣 App 中的二维码")
                     .font(DSFont.body.weight(.semibold))
                 Text("识别 dshremote:// 后自动填充地址与 Token\n连接成功时震动反馈")
                     .font(DSFont.footnote)

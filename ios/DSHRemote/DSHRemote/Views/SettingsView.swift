@@ -21,7 +21,7 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 Section {
-                    TextField(text: $baseURL, prompt: Text("Mac 地址，如 http://192.168.1.10:3878")) {
+                    TextField(text: $baseURL, prompt: Text("电脑地址，如 http://192.168.1.10:3878")) {
                         Text("服务器地址")
                     }
                     .keyboardType(.URL)
@@ -59,7 +59,7 @@ struct SettingsView: View {
                 } header: {
                     Text("桥接服务")
                 } footer: {
-                    Text("Token 在 Mac 上运行桥接服务时打印，或查看 ~/.dsh-remote-bridge/token")
+                    Text("Token 在电脑上运行桥接服务时打印，或查看 ~/.dsh-remote-bridge/token")
                 }
 
                 Section {
@@ -74,7 +74,7 @@ struct SettingsView: View {
                     }
                     .buttonStyle(.borderedProminent)
                 } footer: {
-                    Text("在 Mac 伴侣 App 中启动桥接服务，扫描其显示的二维码即可自动完成配置。")
+                    Text("在电脑伴侣 App 中启动桥接服务，扫描其显示的二维码即可自动完成配置。")
                 }
 
                 Section {
@@ -115,7 +115,7 @@ struct SettingsView: View {
                 Section("关于") {
                     LabeledContent("App", value: "掌中鲸")
                     LabeledContent("桥接服务", value: "dsh-remote-bridge")
-                    Text("通过局域网内的桥接服务远程控制 Mac 上的 DeepSeek Harness。")
+                    Text("通过局域网内的桥接服务远程控制电脑上的 DeepSeek Harness。")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }

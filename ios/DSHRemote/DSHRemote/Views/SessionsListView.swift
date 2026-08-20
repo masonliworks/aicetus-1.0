@@ -28,7 +28,7 @@ struct SessionsListView: View {
                     ContentUnavailableView(
                         "没有会话",
                         systemImage: "bubble.left",
-                        description: Text("点击右上角 + 新建会话，或确认 Mac 上的 DSH 正在运行")
+                        description: Text("点击右上角 + 新建会话，或确认电脑上的 DSH 正在运行")
                     )
                 } else {
                     List {
